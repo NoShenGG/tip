@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://bapy7sipveg0c"]
+
+[sub_resource type="EventAsset" id="EventAsset_44wlx"]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/Test"
+guid = "{2ab79860-442a-42b0-b956-380fa1dc9a89}"
+name = "Test"
+
+[sub_resource type="BankAsset" id="BankAsset_633rn"]
+file_path = "res://addons/FMOD/banks/Desktop/Master.bank"
+modified_time = 1699599297
+path = "bank:/Master"
+guid = "{e02a8011-03ec-4637-8ec4-9da710c89757}"
+name = "Master"
+
+[node name="Sandbox" type="Node3D"]
+
+[node name="StudioListener3D" type="StudioListener3D" parent="."]
+
+[node name="StudioEventEmitter3D" type="StudioEventEmitter3D" parent="."]
+play_event = 2
+event = SubResource("EventAsset_44wlx")
+
+[node name="StudioBankLoader" type="StudioBankLoader" parent="."]
+load_on = 1
+num_banks = 1
+bank_0 = SubResource("BankAsset_633rn")

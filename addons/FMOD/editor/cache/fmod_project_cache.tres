@@ -1,0 +1,79 @@
+[gd_resource type="ProjectCache" load_steps=6 format=3 uid="uid://b2ka56j3u141v"]
+
+[sub_resource type="BankAsset" id="BankAsset_633rn"]
+file_path = "res://addons/FMOD/banks/Desktop/Master.bank"
+modified_time = 1699599297
+path = "bank:/Master"
+guid = "{e02a8011-03ec-4637-8ec4-9da710c89757}"
+name = "Master"
+
+[sub_resource type="BankAsset" id="BankAsset_m552l"]
+file_path = "res://addons/FMOD/banks/Desktop/Master.strings.bank"
+modified_time = 1699599297
+path = "bank:/Master.strings"
+guid = "{7837a0c5-7297-0a75-088d-1759e13b91cf}"
+name = "Master.strings"
+
+[sub_resource type="BusAsset" id="BusAsset_sdi5l"]
+path = "bus:/Reverb"
+guid = "{cc9589d3-1926-4912-82a9-29aca17eb8ae}"
+name = "Reverb"
+
+[sub_resource type="BusAsset" id="BusAsset_rc8w5"]
+path = "bus:/"
+guid = "{a4c296f8-f077-452b-8546-ea7f7bfb8858}"
+name = "Master"
+
+[sub_resource type="EventAsset" id="EventAsset_44wlx"]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/Test"
+guid = "{2ab79860-442a-42b0-b956-380fa1dc9a89}"
+name = "Test"
+
+[resource]
+banks = {
+"{7837a0c5-7297-0a75-088d-1759e13b91cf}": SubResource("BankAsset_m552l"),
+"{e02a8011-03ec-4637-8ec4-9da710c89757}": SubResource("BankAsset_633rn")
+}
+events = {
+"{2ab79860-442a-42b0-b956-380fa1dc9a89}": SubResource("EventAsset_44wlx")
+}
+busses = {
+"{a4c296f8-f077-452b-8546-ea7f7bfb8858}": SubResource("BusAsset_rc8w5"),
+"{cc9589d3-1926-4912-82a9-29aca17eb8ae}": SubResource("BusAsset_sdi5l")
+}
+bank_tree = [{
+"children": [],
+"item_type": 3,
+"node_name": "Master",
+"path": "bank:/Master",
+"resource": SubResource("BankAsset_633rn")
+}, {
+"children": [],
+"item_type": 3,
+"node_name": "Master.strings",
+"path": "bank:/Master.strings",
+"resource": SubResource("BankAsset_m552l")
+}]
+event_tree = [{
+"children": [],
+"item_type": 1,
+"node_name": "Test",
+"path": "event:/Test",
+"resource": SubResource("EventAsset_44wlx")
+}]
+bus_tree = [{
+"children": [{
+"children": [],
+"item_type": 4,
+"node_name": "Reverb",
+"path": "bus:/Reverb",
+"resource": SubResource("BusAsset_sdi5l")
+}],
+"item_type": 4,
+"node_name": "bus:",
+"path": "bus:/",
+"resource": SubResource("BusAsset_rc8w5")
+}]
