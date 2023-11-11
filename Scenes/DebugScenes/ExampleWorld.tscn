@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bp1v2a1emfy7d"]
+
+[ext_resource type="PackedScene" uid="uid://bq7jj8c7sqndr" path="res://Prefabs/Player.tscn" id="1_dpnxn"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_atars"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_ce3p3"]
+sky_material = SubResource("ProceduralSkyMaterial_atars")
+
+[sub_resource type="Environment" id="Environment_dmjg3"]
+background_mode = 2
+sky = SubResource("Sky_ce3p3")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="ExampleWorld" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dmjg3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+use_collision = true
+size = Vector3(20, 0.2, 20)
+
+[node name="Player" parent="." instance=ExtResource("1_dpnxn")]
