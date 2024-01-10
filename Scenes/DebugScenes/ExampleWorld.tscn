@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bp1v2a1emfy7d"]
+[gd_scene load_steps=11 format=3 uid="uid://bp1v2a1emfy7d"]
 
 [ext_resource type="PackedScene" uid="uid://bq7jj8c7sqndr" path="res://Prefabs/Player.tscn" id="1_dpnxn"]
 
@@ -15,6 +15,20 @@ sky = SubResource("Sky_ce3p3")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_ek145"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g2tr5"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_nrvyf"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1470l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oi2sb"]
+albedo_color = Color(0.215686, 0.215686, 0.215686, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d7yt8"]
+
 [node name="ExampleWorld" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -24,9 +38,50 @@ environment = SubResource("Environment_dmjg3")
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="Player" parent="." instance=ExtResource("1_dpnxn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.912464, 0)
+sensitivity = 0.12
+
+[node name="BasicBoxRoom" type="Node3D" parent="."]
+
+[node name="Brushes" type="Node3D" parent="BasicBoxRoom"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="BasicBoxRoom/Brushes"]
 use_collision = true
 size = Vector3(20, 0.2, 20)
 
-[node name="Player" parent="." instance=ExtResource("1_dpnxn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.912464, 0)
+[node name="CSGBox3D2" type="CSGBox3D" parent="BasicBoxRoom/Brushes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0012, 9.57923, 0.166497)
+use_collision = true
+size = Vector3(0.2, 20, 21.8383)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="BasicBoxRoom/Brushes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0122, 9.67367, 0.332993)
+use_collision = true
+size = Vector3(0.2, 20, 21.8383)
+
+[node name="Elements" type="Node3D" parent="BasicBoxRoom"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="BasicBoxRoom/Elements"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.43142, 0.164721, 7.99246)
+
+[node name="Button" type="MeshInstance3D" parent="BasicBoxRoom/Elements/StaticBody3D"]
+transform = Transform3D(2, 0, 0, 0, 0.1, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource("CylinderMesh_ek145")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_g2tr5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasicBoxRoom/Elements/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_nrvyf")
+
+[node name="Box" type="RigidBody3D" parent="BasicBoxRoom/Elements"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.98125, 1.14653, 5.25861)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BasicBoxRoom/Elements/Box"]
+mesh = SubResource("BoxMesh_1470l")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_oi2sb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasicBoxRoom/Elements/Box"]
+shape = SubResource("BoxShape3D_d7yt8")
