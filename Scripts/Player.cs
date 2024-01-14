@@ -1,4 +1,5 @@
 using Godot;
+using Tip.Scripts.TimeMechanics;
 
 public partial class Player : CharacterBody3D {
 	[ExportCategory("Movement")]
@@ -8,18 +9,18 @@ public partial class Player : CharacterBody3D {
 	private const float Gravity = 15.34f;
 	private const float StopSpeed = 1.5f;
 	private static readonly float JumpImpulse = Mathf.Sqrt(2 * Gravity * 0.85f);
-	[Export]
-	private float friction = 4f;
+	[Export] private float friction = 4f;
 	
 	[ExportCategory("Input")]
-	[Export]
-	private float sensitivity = 0.5f;
+	[Export] private float sensitivity = 0.5f;
 	private Node3D _head;
 	private Vector3 movementDir;
 	private bool isJump;
+	private bool checkRaycast;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
+		// Locks player mouse to center of screen and hides it for first person controls
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 		_head = GetNode<Node3D>("Head");
 	}
@@ -31,11 +32,19 @@ public partial class Player : CharacterBody3D {
 	
 	// Called every physics update
 	public override void _PhysicsProcess(double delta) {
-		ProcessInput();
+		ProcessMovementInput();
 		ProcessMovement(delta);
+
+		if (checkRaycast) {
+			RayCast3D raycast = GetNode<RayCast3D>("Head/Camera3D/RayCast3D");
+			if (raycast.GetCollider() is TimeObject timeObject) {
+				timeObject.FlipTime();
+			}
+		}
+		checkRaycast = false;
 	}
 
-	private void ProcessInput() {
+	private void ProcessMovementInput() {
 		movementDir = Vector3.Zero;
 
 		if (Input.IsActionPressed("forward")) {
@@ -101,6 +110,11 @@ public partial class Player : CharacterBody3D {
 		// Handle mouse input
 		if (@event is InputEventMouseMotion mouseMotion && Input.MouseMode.Equals(Input.MouseModeEnum.Captured)) {
 			HandleCameraRotation(mouseMotion);
+		} else if (@event is InputEventMouseButton mouseButton &&
+		           Input.MouseMode.Equals(Input.MouseModeEnum.Captured)) {
+			if (mouseButton.Pressed && mouseButton.ButtonIndex == MouseButton.Left) {
+				checkRaycast = true;
+			}
 		}
 	}
 

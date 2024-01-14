@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpmd17evmlcy2"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ek145"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g2tr5"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_wmnwq"]
+height = 0.2
+radius = 1.0
+
+[node name="Button" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 0.1, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource("CylinderMesh_ek145")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_g2tr5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_wmnwq")
