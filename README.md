@@ -1,2 +1,2 @@
 # Tip
-VGDev Game Pitch for Spring 2024
+VGDev Game for Spring 2024
