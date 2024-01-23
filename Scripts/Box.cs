@@ -7,6 +7,7 @@ public partial class Box : TimeObject
 	[Export] private Vector3 _spawnPos = Vector3.Zero;
 
 	public override void _Ready() {
+		ProcessMode = Node.ProcessModeEnum.Pausable;
 		base._Ready();
 		Position = _spawnPos;
 	}
