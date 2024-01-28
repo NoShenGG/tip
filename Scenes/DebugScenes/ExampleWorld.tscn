@@ -1,11 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://bp1v2a1emfy7d"]
+[gd_scene load_steps=17 format=3 uid="uid://bp1v2a1emfy7d"]
 
 [ext_resource type="PackedScene" uid="uid://bq7jj8c7sqndr" path="res://Prefabs/Player.tscn" id="1_dpnxn"]
+[ext_resource type="PackedScene" uid="uid://cdelvfwui4h25" path="res://Prefabs/pause_controller.tscn" id="1_vjlqc"]
 [ext_resource type="PackedScene" uid="uid://bpmd17evmlcy2" path="res://Prefabs/PuzzleElements/Button.tscn" id="2_4i3mg"]
 [ext_resource type="Script" path="res://Scripts/DeathPlane.cs" id="2_853mo"]
 [ext_resource type="PackedScene" uid="uid://bfublhg2eklou" path="res://Prefabs/PuzzleElements/Box.tscn" id="3_jngw2"]
 [ext_resource type="Script" path="res://Scripts/Box.cs" id="4_ikbmk"]
 [ext_resource type="PackedScene" uid="uid://dbvxonk7dvr04" path="res://Prefabs/PuzzleElements/Platform.tscn" id="5_2dj6v"]
+[ext_resource type="Script" path="res://Scripts/Keystone.cs" id="8_wc5bh"]
+[ext_resource type="Script" path="res://Scripts/Keyhole.cs" id="9_1uc57"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_atars"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -22,7 +25,16 @@ glow_enabled = true
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_wg8eq"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_u335p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tsmrf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yjocd"]
+size = Vector3(1.9635, 1.51904, 3.6767)
+
 [node name="ExampleWorld" type="Node3D"]
+
+[node name="PauseController" parent="." instance=ExtResource("1_vjlqc")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_dmjg3")
@@ -32,6 +44,7 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_dpnxn")]
+process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.912464, 0)
 sensitivity = 0.12
 
@@ -71,7 +84,7 @@ size = Vector3(20, 0.2, 20)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.26338, 0.200431, 7.88307)
 
 [node name="Box" parent="BasicBoxRoom/Elements" instance=ExtResource("3_jngw2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.99421, 7.52755, 5.58189)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.99098, 7.52755, 5.56903)
 script = ExtResource("4_ikbmk")
 _spawnPos = Vector3(-3.994, 7.528, 5.582)
 
@@ -80,3 +93,40 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.83881, 12.1527)
 lock_rotation = true
 script = ExtResource("4_ikbmk")
 _spawnPos = Vector3(0, 6.839, 12.153)
+
+[node name="KeySystem" type="Node3D" parent="BasicBoxRoom/Elements"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0079875, -4.76837e-07, 0.0237651)
+
+[node name="Keyhole" type="Node3D" parent="BasicBoxRoom/Elements/KeySystem"]
+
+[node name="Keystone" parent="BasicBoxRoom/Elements/KeySystem/Keyhole" instance=ExtResource("3_jngw2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.407465, 2.55427, -4.71304)
+physics_material_override = SubResource("PhysicsMaterial_u335p")
+script = ExtResource("8_wc5bh")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="BasicBoxRoom/Elements/KeySystem/Keyhole"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23979, -2.48559)
+operation = 2
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="BasicBoxRoom/Elements/KeySystem/Keyhole/CSGCombiner3D"]
+transform = Transform3D(5.47941, 0, 0, 0, 5.47941, 0, 0, 0, 5.47941, -0.449539, 1.55339, -1.54109)
+size = Vector3(1, 1, 0.670898)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="BasicBoxRoom/Elements/KeySystem/Keyhole/CSGCombiner3D"]
+transform = Transform3D(1.95605, 0, 0, 0, 1.95605, 0, 0, 0, 1.95605, -0.42218, 1.37562, -2.41706)
+operation = 2
+
+[node name="Area3D" type="Area3D" parent="BasicBoxRoom/Elements/KeySystem/Keyhole"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.422704, 1.41423, -4.4354)
+script = ExtResource("9_1uc57")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasicBoxRoom/Elements/KeySystem/Keyhole/Area3D"]
+shape = SubResource("BoxShape3D_tsmrf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasicBoxRoom/Elements/KeySystem/Keyhole"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.416935, 0.878767, -4.03191)
+shape = SubResource("BoxShape3D_yjocd")
+
+[connection signal="body_entered" from="BasicBoxRoom/Elements/KeySystem/Keyhole/Area3D" to="BasicBoxRoom/Elements/KeySystem/Keyhole/Area3D" method="_on_body_entered"]
+
+[editable path="BasicBoxRoom/Elements/KeySystem/Keyhole/Keystone"]
