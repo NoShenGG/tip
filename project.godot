@@ -13,7 +13,8 @@ config_version=5
 config/name="Tip"
 run/main_scene="res://Scenes/DebugScenes/ExampleWorld.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
