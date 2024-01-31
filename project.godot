@@ -19,10 +19,15 @@ config/windows_native_icon="res://icon.ico"
 [autoload]
 
 FMODRuntime="*res://addons/FMOD/runtime/fmod_runtime_manager.gd"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [dotnet]
 
 project/assembly_name="Tip"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/FMOD/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
 
 [filesystem]
 
