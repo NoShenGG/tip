@@ -32,9 +32,10 @@ public abstract partial class TimeObject : RigidBody3D {
             _reversalKeyframe = _objectHistory.RemovePositionKeyframe();
             if (_reversalKeyframe != null) {
                 Position = _reversalKeyframe.position;
+                Rotation = _reversalKeyframe.rotation;
             }
         } else if (!Freeze) {
-            _objectHistory.AddPositionKeyframe(Position, delta);
+            _objectHistory.AddPositionKeyframe(Position, Rotation, delta);
         }
     }
 

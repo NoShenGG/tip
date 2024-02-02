@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Godot;
 
 namespace Tip.Scripts.TimeMechanics; 
@@ -9,7 +8,7 @@ public class ObjectHistory {
     private double _currentTimeStored = 0.0;
     private List<PositionKeyframe> _positionHistory = new List<PositionKeyframe>();
 
-    public void AddPositionKeyframe(Vector3 currentPosition, double delta) {
+    public void AddPositionKeyframe(Vector3 currentPosition, Vector3 currentRotation, double delta) {
         _currentTimeStored += delta;
         
         // If necessary, lerp between oldest two positions to maintain max time
@@ -32,17 +31,18 @@ public class ObjectHistory {
 
             float lerpWeightApproximation = (float) (boundsDelta - timeRemoved);
             Vector3 lerpPosition = last.position.Lerp(first.position, lerpWeightApproximation);
+            Vector3 lerpRotation = last.rotation.Lerp(first.rotation, lerpWeightApproximation);
 
             // Remove extra keyframes and add interpolated keyframe
             for (int i = 0; i < currentLastMarker; i++) {
                 _positionHistory.RemoveAt(0);
             }
-            _positionHistory.Insert(0, new PositionKeyframe(lerpPosition, 0.0));
+            _positionHistory.Insert(0, new PositionKeyframe(lerpPosition, lerpRotation, 0.0));
 
             _currentTimeStored = MaxSecondsStored;
         }
         
-        _positionHistory.Add(new PositionKeyframe(currentPosition, delta));
+        _positionHistory.Add(new PositionKeyframe(currentPosition, currentRotation, delta));
     }
 
     public PositionKeyframe RemovePositionKeyframe() {
