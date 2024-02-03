@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b0y3h7aiwtfjd"
-path="res://.godot/imported/Button_v8.fbx-1cc4ed5b66386709bda0607b59dd0b69.scn"
+uid="uid://det5w6foplmb5"
+path="res://.godot/imported/Hydrant_v2.fbx-81ccb5409b318ee388d5b661115d7144.scn"
 
 [deps]
 
-source_file="res://Scenes/Models/Button_v8.fbx"
-dest_files=["res://.godot/imported/Button_v8.fbx-1cc4ed5b66386709bda0607b59dd0b69.scn"]
+source_file="res://Scenes/Models/FBX/Hydrant_v2.fbx"
+dest_files=["res://.godot/imported/Hydrant_v2.fbx-81ccb5409b318ee388d5b661115d7144.scn"]
 
 [params]
 
