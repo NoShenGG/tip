@@ -1,4 +1,5 @@
 using Godot;
+
 using Tip.Scripts.TimeMechanics;
 
 public partial class Player : CharacterBody3D {
@@ -17,9 +18,8 @@ public partial class Player : CharacterBody3D {
 	private Vector3 _movementDir;
 	private bool _isJump;
 	private bool _checkRaycast;
-	private bool _pickup;
-	private Node _heldItem;
-	private Node _originalPickupParent;
+	private bool _checkPickup;
+	private Box _heldItem;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
@@ -45,20 +45,21 @@ public partial class Player : CharacterBody3D {
 			}
 		}
 
-		if (_pickup) {
-			if (_originalPickupParent == null) {
+		// TODO This is hacky and jank and should be abstracted better at some point
+		if (_checkPickup) {
+			if (_heldItem == null) {
 				RayCast3D raycast = GetNode<RayCast3D>("Head/Camera3D/PickupRaycast");
 				if (raycast.GetCollider() is Box box) {
-					_originalPickupParent = box.GetParent();
-					box.Reparent(raycast, true);
-					box.Position = new Vector3(0, 0, -3);
+					_heldItem = box;
+					box.SetPickupPos(GetNode<Node3D>("Head/Camera3D/PickupPos"));
 				}
 			} else {
-				
+				_heldItem.SetPickupPos(null);
+				_heldItem = null;
 			}
 		}
-
-		_pickup = false;
+		
+		_checkPickup = false;
 		_checkRaycast = false;
 	}
 
@@ -135,8 +136,7 @@ public partial class Player : CharacterBody3D {
 			}
 		} else if (@event is InputEventKey key && Input.MouseMode.Equals(Input.MouseModeEnum.Captured)) {
 			if (key.PhysicalKeycode == Key.E && key.Echo == false && key.Pressed == true) {
-				_pickup = !_pickup;
-				GD.Print("PickedUp.Box");
+				_checkPickup = true;
 			}
 		}
 	}
