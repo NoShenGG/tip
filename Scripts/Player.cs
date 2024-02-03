@@ -9,14 +9,17 @@ public partial class Player : CharacterBody3D {
 	private const float Gravity = 15.34f;
 	private const float StopSpeed = 1.5f;
 	private static readonly float JumpImpulse = Mathf.Sqrt(2 * Gravity * 0.85f);
-	[Export] private float friction = 4f;
+	[Export] private float _friction = 4f;
 	
 	[ExportCategory("Input")]
-	[Export] private float sensitivity = 0.5f;
+	[Export] private float _sensitivity = 0.5f;
 	private Node3D _head;
-	private Vector3 movementDir;
-	private bool isJump;
-	private bool checkRaycast;
+	private Vector3 _movementDir;
+	private bool _isJump;
+	private bool _checkRaycast;
+	private bool _pickup;
+	private Node _heldItem;
+	private Node _originalPickupParent;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
@@ -35,41 +38,56 @@ public partial class Player : CharacterBody3D {
 		ProcessMovementInput();
 		ProcessMovement(delta);
 
-		if (checkRaycast) {
+		if (_checkRaycast) {
 			RayCast3D raycast = GetNode<RayCast3D>("Head/Camera3D/RayCast3D");
 			if (raycast.GetCollider() is TimeObject timeObject) {
 				timeObject.FlipTime();
 			}
 		}
-		checkRaycast = false;
+
+		if (_pickup) {
+			if (_originalPickupParent == null) {
+				RayCast3D raycast = GetNode<RayCast3D>("Head/Camera3D/PickupRaycast");
+				if (raycast.GetCollider() is Box box) {
+					_originalPickupParent = box.GetParent();
+					box.Reparent(raycast, true);
+					box.Position = new Vector3(0, 0, -3);
+				}
+			} else {
+				
+			}
+		}
+
+		_pickup = false;
+		_checkRaycast = false;
 	}
 
 	private void ProcessMovementInput() {
-		movementDir = Vector3.Zero;
+		_movementDir = Vector3.Zero;
 
 		if (Input.IsActionPressed("forward")) {
-			movementDir -= Transform.Basis.Z;
+			_movementDir -= Transform.Basis.Z;
 		} else if (Input.IsActionPressed("backward")) {
-			movementDir += Transform.Basis.Z;
+			_movementDir += Transform.Basis.Z;
 		}
 		if (Input.IsActionPressed("left")) {
-			movementDir -= Transform.Basis.X;
+			_movementDir -= Transform.Basis.X;
 		} else if (Input.IsActionPressed("right")) {
-			movementDir += Transform.Basis.X;
+			_movementDir += Transform.Basis.X;
 		}
 		
 		// Handle jumping
-		isJump = Input.IsActionJustPressed("jump");
+		_isJump = Input.IsActionJustPressed("jump");
 	}
 
 	private void ProcessMovement(double delta) {
-		Vector3 normalMoveDir = movementDir.Normalized();
+		Vector3 normalMoveDir = _movementDir.Normalized();
 
 		if (IsOnFloor()) {
-			if (isJump) {
+			if (_isJump) {
 				Velocity = new Vector3(Velocity.X, JumpImpulse, Velocity.Z);
 				Velocity = UpdateVelocityAir(normalMoveDir, delta);
-				isJump = false;
+				_isJump = false;
 			} else {
 				Velocity = UpdateVelocityGround(normalMoveDir, delta);
 			}
@@ -92,7 +110,7 @@ public partial class Player : CharacterBody3D {
 
 		if (speed != 0f) {
 			float control = Mathf.Max(StopSpeed, speed);
-			float drop = control * friction * (float) delta;
+			float drop = control * _friction * (float) delta;
 
 			Velocity *= Mathf.Max(speed - drop, 0) / speed;
 		}
@@ -113,14 +131,19 @@ public partial class Player : CharacterBody3D {
 		} else if (@event is InputEventMouseButton mouseButton &&
 		           Input.MouseMode.Equals(Input.MouseModeEnum.Captured)) {
 			if (mouseButton.Pressed && mouseButton.ButtonIndex == MouseButton.Left) {
-				checkRaycast = true;
+				_checkRaycast = true;
+			}
+		} else if (@event is InputEventKey key && Input.MouseMode.Equals(Input.MouseModeEnum.Captured)) {
+			if (key.PhysicalKeycode == Key.E && key.Echo == false && key.Pressed == true) {
+				_pickup = !_pickup;
+				GD.Print("PickedUp.Box");
 			}
 		}
 	}
 
 	private void HandleCameraRotation(InputEventMouseMotion mouseMotion) {
-		RotateY(Mathf.DegToRad(-mouseMotion.Relative.X * sensitivity));
-		_head.RotateX(Mathf.DegToRad(-mouseMotion.Relative.Y * sensitivity));
+		RotateY(Mathf.DegToRad(-mouseMotion.Relative.X * _sensitivity));
+		_head.RotateX(Mathf.DegToRad(-mouseMotion.Relative.Y * _sensitivity));
 
 		Vector3 clampedRotation = new Vector3(
 			Mathf.Clamp(_head.Rotation.X, Mathf.DegToRad(-90), Mathf.DegToRad(90)),

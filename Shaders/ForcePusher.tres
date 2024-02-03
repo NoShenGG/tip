@@ -91,7 +91,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-516.289, 109.633)
 modes/cull = 2
 flags/unshaded = true
 varyings/vertexNormal = "0,4"
