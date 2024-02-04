@@ -137,6 +137,8 @@ public partial class Player : CharacterBody3D {
 		} else if (@event is InputEventKey key && Input.MouseMode.Equals(Input.MouseModeEnum.Captured)) {
 			if (key.PhysicalKeycode == Key.E && key.Echo == false && key.Pressed == true) {
 				_checkPickup = true;
+			} else if (key.IsActionPressed("DEBUG_RESET")) {
+				GetTree().ReloadCurrentScene();
 			}
 		}
 	}
