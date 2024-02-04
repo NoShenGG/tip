@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cdelvfwui4h25"]
-
-[ext_resource type="Script" path="res://Scripts/TimeMechanics/TimeStop.cs" id="1_c63v1"]
-
-[node name="PauseController" type="Node"]
-process_mode = 3
-script = ExtResource("1_c63v1")
