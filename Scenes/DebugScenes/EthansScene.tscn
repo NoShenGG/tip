@@ -1,6 +1,5 @@
-[gd_scene load_steps=16 format=3 uid="uid://coa2ft2rjvtxq"]
+[gd_scene load_steps=15 format=3 uid="uid://coa2ft2rjvtxq"]
 
-[ext_resource type="PackedScene" uid="uid://cdelvfwui4h25" path="res://Prefabs/pause_controller.tscn" id="1_ayowm"]
 [ext_resource type="PackedScene" uid="uid://bq7jj8c7sqndr" path="res://Prefabs/Player.tscn" id="2_lr288"]
 [ext_resource type="Script" path="res://Scripts/DeathPlane.cs" id="3_jcsud"]
 [ext_resource type="PackedScene" uid="uid://bpmd17evmlcy2" path="res://Prefabs/PuzzleElements/Button.tscn" id="4_ybfsf"]
@@ -30,8 +29,6 @@ glow_enabled = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_tsmrf"]
 
 [node name="EthansScene" type="Node3D"]
-
-[node name="PauseController" parent="." instance=ExtResource("1_ayowm")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_dmjg3")
