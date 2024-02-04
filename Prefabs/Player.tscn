@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bq7jj8c7sqndr"]
+[gd_scene load_steps=4 format=3 uid="uid://bq7jj8c7sqndr"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_clcwi"]
+[ext_resource type="Texture2D" uid="uid://dk1y2peaaxy0k" path="res://ch.png" id="2_sc5pm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o0kbj"]
 size = Vector3(0.5, 1.4, 0.5)
@@ -26,3 +27,19 @@ hit_back_faces = false
 
 [node name="PickupPos" type="Node3D" parent="Head/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="TextureRect" type="TextureRect" parent="Head/Camera3D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_sc5pm")
+expand_mode = 2
+stretch_mode = 5
