@@ -17,7 +17,6 @@ public partial class Player : CharacterBody3D {
 	private Node3D _head;
 	private Vector3 _movementDir;
 	private bool _isJump;
-	private bool _checkRaycast;
 	private bool _checkPickup;
 	private Box _heldItem;
 	
@@ -38,13 +37,6 @@ public partial class Player : CharacterBody3D {
 		ProcessMovementInput();
 		ProcessMovement(delta);
 
-		if (_checkRaycast) {
-			RayCast3D raycast = GetNode<RayCast3D>("Head/Camera3D/RayCast3D");
-			if (raycast.GetCollider() is TimeObject timeObject) {
-				timeObject.FlipTime();
-			}
-		}
-
 		// TODO This is hacky and jank and should be abstracted better at some point
 		if (_checkPickup) {
 			if (_heldItem == null) {
@@ -60,7 +52,6 @@ public partial class Player : CharacterBody3D {
 		}
 		
 		_checkPickup = false;
-		_checkRaycast = false;
 	}
 
 	private void ProcessMovementInput() {
@@ -129,17 +120,10 @@ public partial class Player : CharacterBody3D {
 		// Handle mouse input
 		if (@event is InputEventMouseMotion mouseMotion && Input.MouseMode.Equals(Input.MouseModeEnum.Captured)) {
 			HandleCameraRotation(mouseMotion);
-		} else if (@event is InputEventMouseButton mouseButton &&
-		           Input.MouseMode.Equals(Input.MouseModeEnum.Captured)) {
-			if (mouseButton.Pressed && mouseButton.ButtonIndex == MouseButton.Left) {
-				_checkRaycast = true;
-			}
-		} else if (@event is InputEventKey key && Input.MouseMode.Equals(Input.MouseModeEnum.Captured)) {
-			if (key.PhysicalKeycode == Key.E && key.Echo == false && key.Pressed == true) {
-				_checkPickup = true;
-			} else if (key.IsActionPressed("DEBUG_RESET")) {
-				GetTree().ReloadCurrentScene();
-			}
+		} else if (@event.IsActionPressed("interact") && Input.MouseMode.Equals(Input.MouseModeEnum.Captured)) {
+			_checkPickup = true;
+		} else if (@event.IsActionPressed("DEBUG_RESET")) {
+			GetTree().ReloadCurrentScene();
 		}
 	}
 

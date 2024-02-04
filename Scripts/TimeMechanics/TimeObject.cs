@@ -13,6 +13,9 @@ public abstract partial class TimeObject : RigidBody3D {
         _objectHistory = new ObjectHistory();
         _isReversing = false;
         _reversalKeyframe = null;
+        
+        // This is NECESSARY to control time behavior. DO NOT TOUCH
+        GetNode<TimeManager>("/root/TimeManager").AddSubscriber(this);
     }
 
     public override void _Process(double delta) {
@@ -39,28 +42,32 @@ public abstract partial class TimeObject : RigidBody3D {
         }
     }
 
-    public void FlipTime() {
-        if (_isReversing) {
-            StopRewind();
-        } else {
-            StartRewind();
+    public override void _Notification(int what) {
+        base._Notification(what);
+        // NECESSARY TO NOT HAVE A MEMORY LEAK AND BAD REFERENCES
+        if (what == NotificationPredelete) {
+            GetNode<TimeManager>("/root/TimeManager").RemoveSubscriber(this);
         }
     }
 
-    private void StartRewind() {
-        _isReversing = true;
-        Freeze = true;
-        _rewindTimer = new Timer();
-        _rewindTimer.WaitTime = 10.0;
-        _rewindTimer.Timeout += StopRewind;
-        _rewindTimer.Autostart = true;
-    }
-
-    private void StopRewind() {
-        _rewindTimer.Timeout -= StopRewind;
-        _rewindTimer.Stop();
-        _rewindTimer.Free();
-        Freeze = false;
-        _isReversing = false;
+    // Necessary to control time behavior, don't modify unless you know what you're doing
+    public void UpdateTimeBehavior(TimeState currentState) {
+        switch (currentState) {
+            case TimeState.Normal:
+                _isReversing = false;
+                Freeze = false;
+                break;
+            case TimeState.Stopped:
+                _isReversing = false;
+                Freeze = true;
+                break;
+            case TimeState.Rewinding:
+                _isReversing = true;
+                Freeze = true;
+                break;
+            default:
+                GD.PrintErr("Unhandled TimeState!");
+                break;
+        }
     }
 }

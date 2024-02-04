@@ -1,6 +1,5 @@
-[gd_scene load_steps=16 format=3 uid="uid://rmh7xf305yxq"]
+[gd_scene load_steps=15 format=3 uid="uid://rmh7xf305yxq"]
 
-[ext_resource type="PackedScene" uid="uid://cdelvfwui4h25" path="res://Prefabs/pause_controller.tscn" id="1_gnpwh"]
 [ext_resource type="PackedScene" uid="uid://bq7jj8c7sqndr" path="res://Prefabs/Player.tscn" id="2_61onl"]
 [ext_resource type="Script" path="res://Scripts/DeathPlane.cs" id="3_hgmoi"]
 [ext_resource type="PackedScene" uid="uid://bfublhg2eklou" path="res://Prefabs/PuzzleElements/Box.tscn" id="5_5kga6"]
@@ -31,8 +30,6 @@ size = Vector3(1000, 5, 1000)
 [sub_resource type="BoxShape3D" id="BoxShape3D_bvdy7"]
 
 [node name="MainDavid" type="Node3D"]
-
-[node name="PauseController" parent="." instance=ExtResource("1_gnpwh")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_dmjg3")
