@@ -125,3 +125,4 @@ addons/FMOD/tests/fmod_test_project/.unsaved
 addons/FMOD/editor/cache/fmod_project_cache.tres
 addons/FMOD/native/lib/win64/release/~libfmod.windows.template_release.dll
 addons/godot-jolt/windows/~godot-jolt_windows-x64_editor.dll
+desktop.ini
