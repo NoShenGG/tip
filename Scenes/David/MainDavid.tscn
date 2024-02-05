@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://rmh7xf305yxq"]
+[gd_scene load_steps=17 format=3 uid="uid://rmh7xf305yxq"]
 
 [ext_resource type="PackedScene" uid="uid://bq7jj8c7sqndr" path="res://Prefabs/Player.tscn" id="2_61onl"]
+[ext_resource type="Texture2D" uid="uid://cmavs81v1lh6h" path="res://_Prototype/Dark/texture_01.png" id="3_ctq3c"]
 [ext_resource type="Script" path="res://Scripts/DeathPlane.cs" id="3_hgmoi"]
 [ext_resource type="PackedScene" uid="uid://bfublhg2eklou" path="res://Prefabs/PuzzleElements/Box.tscn" id="5_5kga6"]
 [ext_resource type="Script" path="res://Scripts/Box.cs" id="6_4e4fm"]
@@ -25,6 +26,10 @@ glow_enabled = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_5j88q"]
 size = Vector3(1000, 5, 1000)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_urf7u"]
+albedo_texture = ExtResource("3_ctq3c")
+uv1_triplanar = true
+
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yqey5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bvdy7"]
@@ -41,7 +46,7 @@ shadow_enabled = true
 [node name="Player" parent="." instance=ExtResource("2_61onl")]
 process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.912464, 0)
-_sensitivity = 0.2
+_sensitivity = 0.05
 
 [node name="BasicBoxRoom" type="Node3D" parent="."]
 
@@ -54,24 +59,28 @@ script = ExtResource("3_hgmoi")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -30, 0)
 shape = SubResource("BoxShape3D_5j88q")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="BasicBoxRoom/Brushes"]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="BasicBoxRoom/Brushes"]
+material_override = SubResource("StandardMaterial3D_urf7u")
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="BasicBoxRoom/Brushes/CSGCombiner3D"]
 use_collision = true
 size = Vector3(20, 0.2, 20)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="BasicBoxRoom/Brushes"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="BasicBoxRoom/Brushes/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0012, 9.57923, 0.166497)
 use_collision = true
 size = Vector3(0.2, 20, 21.8383)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="BasicBoxRoom/Brushes"]
+[node name="CSGBox3D3" type="CSGBox3D" parent="BasicBoxRoom/Brushes/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0122, 9.67367, 0.332993)
 use_collision = true
 size = Vector3(0.2, 20, 21.8383)
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="BasicBoxRoom/Brushes"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.80074, 24.2043)
+[node name="CSGBox3D4" type="CSGBox3D" parent="BasicBoxRoom/Brushes/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.80074, 505.404)
 use_collision = true
-size = Vector3(20, 0.2, 20)
+size = Vector3(20, 0.2, 982.399)
 
 [node name="Elements" type="Node3D" parent="BasicBoxRoom"]
 

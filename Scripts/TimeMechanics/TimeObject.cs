@@ -55,14 +55,17 @@ public abstract partial class TimeObject : RigidBody3D {
         switch (currentState) {
             case TimeState.Normal:
                 _isReversing = false;
+                FreezeMode = FreezeModeEnum.Static;
                 Freeze = false;
                 break;
             case TimeState.Stopped:
                 _isReversing = false;
+                FreezeMode = FreezeModeEnum.Static;
                 Freeze = true;
                 break;
             case TimeState.Rewinding:
                 _isReversing = true;
+                FreezeMode = FreezeModeEnum.Kinematic;
                 Freeze = true;
                 break;
             default:
