@@ -1,8 +1,8 @@
 [gd_scene load_steps=17 format=3 uid="uid://rmh7xf305yxq"]
 
 [ext_resource type="PackedScene" uid="uid://bq7jj8c7sqndr" path="res://Prefabs/Player.tscn" id="2_61onl"]
-[ext_resource type="Texture2D" uid="uid://cmavs81v1lh6h" path="res://_Prototype/Dark/texture_01.png" id="3_ctq3c"]
 [ext_resource type="Script" path="res://Scripts/DeathPlane.cs" id="3_hgmoi"]
+[ext_resource type="Texture2D" uid="uid://cxgymaqrwks2x" path="res://_Prototype/Orange/texture_01.png" id="3_vv40x"]
 [ext_resource type="PackedScene" uid="uid://bfublhg2eklou" path="res://Prefabs/PuzzleElements/Box.tscn" id="5_5kga6"]
 [ext_resource type="Script" path="res://Scripts/Box.cs" id="6_4e4fm"]
 [ext_resource type="PackedScene" uid="uid://b6b7y8x4wuqx" path="res://Scenes/Models/Button.tscn" id="7_txs6b"]
@@ -27,7 +27,7 @@ glow_enabled = true
 size = Vector3(1000, 5, 1000)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_urf7u"]
-albedo_texture = ExtResource("3_ctq3c")
+albedo_texture = ExtResource("3_vv40x")
 uv1_triplanar = true
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yqey5"]
