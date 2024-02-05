@@ -3,14 +3,14 @@
 namespace Tip.Scripts.TimeMechanics;
 
 public abstract partial class TimeObject : RigidBody3D {
-    protected ObjectHistory _objectHistory;
+    protected ObjectHistory Keyframes;
     private bool _isReversing;
     private PositionKeyframe _reversalKeyframe;
     private Timer _rewindTimer;
     
     // Called when the node enters the scene tree for the first time.
     public override void _Ready() {
-        _objectHistory = new ObjectHistory();
+        Keyframes = new ObjectHistory();
         _isReversing = false;
         _reversalKeyframe = null;
         
@@ -32,13 +32,13 @@ public abstract partial class TimeObject : RigidBody3D {
 
     public override void _PhysicsProcess(double delta) {
         if (_isReversing) {
-            _reversalKeyframe = _objectHistory.RemovePositionKeyframe();
+            _reversalKeyframe = Keyframes.RemovePositionKeyframe();
             if (_reversalKeyframe != null) {
-                Position = _reversalKeyframe.position;
-                Rotation = _reversalKeyframe.rotation;
+                Position = _reversalKeyframe.Position;
+                Rotation = _reversalKeyframe.Rotation;
             }
         } else if (!Freeze) {
-            _objectHistory.AddPositionKeyframe(Position, Rotation, delta);
+            Keyframes.AddPositionKeyframe(Position, Rotation, delta);
         }
     }
 

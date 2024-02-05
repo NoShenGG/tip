@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Tip.Scripts;
+
 public partial class Keyhole : Area3D
 {
     public override void _Ready()

@@ -1,6 +1,8 @@
 using Godot;
 using Tip.Scripts.TimeMechanics;
 
+namespace Tip.Scripts;
+
 public partial class Box : TimeObject
 {
 	[ExportCategory("Spawning")]
@@ -12,7 +14,6 @@ public partial class Box : TimeObject
 	private Node3D _pickUpPos;
 
 	public override void _Ready() {
-		ProcessMode = Node.ProcessModeEnum.Pausable;
 		base._Ready();
 		Position = _spawnPos;
 	}
@@ -21,7 +22,7 @@ public partial class Box : TimeObject
 		Position = _spawnPos;
 		Rotation = Vector3.Zero;
 		Freeze = true;
-		_objectHistory.Clear();
+		Keyframes.Clear();
 		Freeze = false;
 	}
 
