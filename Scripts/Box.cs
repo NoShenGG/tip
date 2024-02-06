@@ -27,11 +27,13 @@ public partial class Box : TimeObject
 	}
 
 	public override void _PhysicsProcess(double delta) {
-		if (_pickUpPos != null) {
+		if (IsInstanceValid(_pickUpPos)) {
 			Vector3 dir = GlobalPosition.DirectionTo(_pickUpPos.GlobalPosition).Normalized();
 			float mag = GlobalPosition.DistanceTo(_pickUpPos.GlobalPosition);
 
 			LinearVelocity = dir * mag * _trackModifier;
+			Rotation = _pickUpPos.GlobalRotation;
+			Rotation = new Vector3(0, Rotation.Y, Rotation.Z);
 		}
 		base._PhysicsProcess(delta);
 	}
