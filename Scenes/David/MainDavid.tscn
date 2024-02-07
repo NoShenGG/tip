@@ -1,5 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://rmh7xf305yxq"]
+[gd_scene load_steps=19 format=3 uid="uid://rmh7xf305yxq"]
 
+[ext_resource type="Texture2D" uid="uid://p4cq0akituxu" path="res://Assets/skybox.png" id="1_r8t1u"]
 [ext_resource type="PackedScene" uid="uid://bq7jj8c7sqndr" path="res://Prefabs/Player.tscn" id="2_61onl"]
 [ext_resource type="Script" path="res://Scripts/DeathPlane.cs" id="3_hgmoi"]
 [ext_resource type="Texture2D" uid="uid://cxgymaqrwks2x" path="res://_Prototype/Orange/texture_01.png" id="3_vv40x"]
@@ -10,12 +11,11 @@
 [ext_resource type="Script" path="res://Scripts/Keystone.cs" id="8_t344l"]
 [ext_resource type="Script" path="res://Scripts/Keyhole.cs" id="9_gst5g"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_atars"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_xuhe8"]
+panorama = ExtResource("1_r8t1u")
 
 [sub_resource type="Sky" id="Sky_ce3p3"]
-sky_material = SubResource("ProceduralSkyMaterial_atars")
+sky_material = SubResource("PanoramaSkyMaterial_xuhe8")
 
 [sub_resource type="Environment" id="Environment_dmjg3"]
 background_mode = 2
@@ -30,9 +30,13 @@ size = Vector3(1000, 5, 1000)
 albedo_texture = ExtResource("3_vv40x")
 uv1_triplanar = true
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yqey5"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_06sd3"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bvdy7"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yqey5"]
 
 [node name="MainDavid" type="Node3D"]
 
@@ -43,6 +47,7 @@ environment = SubResource("Environment_dmjg3")
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 light_energy = 0.4
 shadow_enabled = true
+shadow_opacity = 0.8
 
 [node name="Player" parent="." instance=ExtResource("2_61onl")]
 process_mode = 3
@@ -103,14 +108,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.22209, 0.366562, 6.93401)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0079875, -4.76837e-07, 0.0237651)
 
 [node name="Keyhole" type="Node3D" parent="BasicBoxRoom/Elements/KeySystem"]
-
-[node name="Keystone" parent="BasicBoxRoom/Elements/KeySystem/Keyhole" instance=ExtResource("5_5kga6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.407465, 2.55427, -7.78166)
-physics_material_override = SubResource("PhysicsMaterial_yqey5")
-script = ExtResource("8_t344l")
+transform = Transform3D(-3.58433e-08, 0, -0.82, 0, 0.82, 0, 0.82, 0, -3.58433e-08, -10.2523, 0, -2.03419)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="BasicBoxRoom/Elements/KeySystem/Keyhole"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23979, -2.48559)
+transform = Transform3D(1, -6.65068e-12, 2.91038e-11, -6.861e-11, 1, 0, 0, 0, 1, 0, 1.23979, -0.869586)
+material_override = SubResource("StandardMaterial3D_06sd3")
 operation = 2
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="BasicBoxRoom/Elements/KeySystem/Keyhole/CSGCombiner3D"]
@@ -122,13 +124,21 @@ transform = Transform3D(1.95605, 0, 0, 0, 1.95605, 0, 0, 0, 1.95605, -0.42218, 1
 operation = 2
 
 [node name="Area3D" type="Area3D" parent="BasicBoxRoom/Elements/KeySystem/Keyhole"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.422704, 2.56235, -4.4354)
+transform = Transform3D(1, -6.65068e-12, 2.91038e-11, -6.861e-11, 1, 0, 0, 0, 1, -0.422704, 2.56235, -2.8194)
 script = ExtResource("9_gst5g")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BasicBoxRoom/Elements/KeySystem/Keyhole/Area3D"]
 transform = Transform3D(1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, 0, 0, -0.485317)
 shape = SubResource("BoxShape3D_bvdy7")
 
+[node name="Keystone" parent="BasicBoxRoom/Elements/KeySystem" instance=ExtResource("5_5kga6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.782595, 0.937902, -0.246933)
+physics_material_override = SubResource("PhysicsMaterial_yqey5")
+script = ExtResource("8_t344l")
+
+[node name="MeshInstance3D" parent="BasicBoxRoom/Elements/KeySystem/Keystone" index="0"]
+skeleton = NodePath("../../Keyhole")
+
 [connection signal="body_entered" from="BasicBoxRoom/Elements/KeySystem/Keyhole/Area3D" to="BasicBoxRoom/Elements/KeySystem/Keyhole/Area3D" method="OnKeyholeBodyEntered"]
 
-[editable path="BasicBoxRoom/Elements/KeySystem/Keyhole/Keystone"]
+[editable path="BasicBoxRoom/Elements/KeySystem/Keystone"]

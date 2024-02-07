@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://coa2ft2rjvtxq"]
+[gd_scene load_steps=15 format=3 uid="uid://30mavnhj07jg"]
 
 [ext_resource type="PackedScene" uid="uid://bq7jj8c7sqndr" path="res://Prefabs/Player.tscn" id="2_lr288"]
 [ext_resource type="Script" path="res://Scripts/DeathPlane.cs" id="3_jcsud"]
@@ -40,7 +40,6 @@ shadow_enabled = true
 [node name="Player" parent="." instance=ExtResource("2_lr288")]
 process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.912464, 0)
-sensitivity = 0.12
 
 [node name="BasicBoxRoom" type="Node3D" parent="."]
 
