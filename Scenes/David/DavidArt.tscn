@@ -42,7 +42,6 @@ shadow_enabled = true
 [node name="Player" parent="." instance=ExtResource("2_kfif0")]
 process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.912464, 0)
-sensitivity = 0.12
 
 [node name="BasicBoxRoom" type="Node3D" parent="."]
 

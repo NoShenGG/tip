@@ -34,6 +34,7 @@ enabled=PackedStringArray("res://addons/FMOD/plugin.cfg", "res://addons/dialogue
 [filesystem]
 
 import/blender/enabled=false
+import/fbx/enabled=false
 
 [fmod]
 
