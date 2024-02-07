@@ -3,13 +3,13 @@ using Godot;
 namespace Tip.Scripts;
 
 public partial class Player : CharacterBody3D {
-	[ExportCategory("Movement")]
 	private const float MaxVelocityAir = 0.6f;
 	private const float MaxVelocityGround = 6.0f;
 	private const float MaxAcceleration = 10 * MaxVelocityGround;
 	private const float Gravity = 15.34f;
 	private const float StopSpeed = 1.5f;
 	private static readonly float JumpImpulse = Mathf.Sqrt(2 * Gravity * 0.85f);
+	[ExportCategory("Movement")]
 	[Export] private float _friction = 4f;
 	
 	[ExportCategory("Input")]
@@ -20,6 +20,7 @@ public partial class Player : CharacterBody3D {
 	private bool _checkPickup;
 	private Box _heldItem;
 	
+	#region Godot Override
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 		// Locks player mouse to center of screen and hides it for first person controls
@@ -53,7 +54,23 @@ public partial class Player : CharacterBody3D {
 		
 		_checkPickup = false;
 	}
+	
+	public override void _Input(InputEvent @event) {
+		base._Input(@event);
+		
+		// Handle mouse input
+		if (@event is InputEventMouseMotion mouseMotion && Input.MouseMode.Equals(Input.MouseModeEnum.Captured)) {
+			HandleCameraRotation(mouseMotion);
+		} else if (@event.IsActionPressed("interact") && Input.MouseMode.Equals(Input.MouseModeEnum.Captured)) {
+			_checkPickup = true;
+		} else if (@event.IsActionPressed("DEBUG_RESET")) {
+			GetTree().ReloadCurrentScene();
+		}
+	}
+	
+	#endregion
 
+	#region Movement
 	private void ProcessMovementInput() {
 		_movementDir = Vector3.Zero;
 
@@ -113,20 +130,10 @@ public partial class Player : CharacterBody3D {
 	private Vector3 UpdateVelocityAir(Vector3 direction, double delta) {
 		return Accelerate(direction, MaxVelocityAir, delta);
 	}
+	
+	#endregion
 
-	public override void _Input(InputEvent @event) {
-		base._Input(@event);
-		
-		// Handle mouse input
-		if (@event is InputEventMouseMotion mouseMotion && Input.MouseMode.Equals(Input.MouseModeEnum.Captured)) {
-			HandleCameraRotation(mouseMotion);
-		} else if (@event.IsActionPressed("interact") && Input.MouseMode.Equals(Input.MouseModeEnum.Captured)) {
-			_checkPickup = true;
-		} else if (@event.IsActionPressed("DEBUG_RESET")) {
-			GetTree().ReloadCurrentScene();
-		}
-	}
-
+	#region Camera
 	private void HandleCameraRotation(InputEventMouseMotion mouseMotion) {
 		RotateY(Mathf.DegToRad(-mouseMotion.Relative.X * _sensitivity));
 		_head.RotateX(Mathf.DegToRad(-mouseMotion.Relative.Y * _sensitivity));
@@ -137,4 +144,5 @@ public partial class Player : CharacterBody3D {
 			_head.Rotation.Z);
 		_head.Rotation = clampedRotation;
 	}
+	#endregion
 }
