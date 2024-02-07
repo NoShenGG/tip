@@ -5,7 +5,7 @@ namespace Tip.Scripts.TimeMechanics;
 
 public class ObjectHistory {
     private const double MaxSecondsStored = 10.0;
-    private double _currentTimeStored = 0.0;
+    private double _currentTimeStored;
     private List<PositionKeyframe> _positionHistory = new List<PositionKeyframe>();
 
     public void AddPositionKeyframe(Vector3 currentPosition, Vector3 currentRotation, double delta) {
@@ -20,18 +20,18 @@ public class ObjectHistory {
             
             // Check to make sure bounding keyframes are sufficient to allocate timeRemoved
             // If not, iterate until accurate
-            double boundsDelta = last.delta;
+            double boundsDelta = last.Delta;
             int currentLastMarker = 1;
             while (boundsDelta < timeRemoved) {
                 first = last;
                 currentLastMarker++;
                 last = _positionHistory[currentLastMarker];
-                boundsDelta += last.delta;
+                boundsDelta += last.Delta;
             }
 
             float lerpWeightApproximation = (float) (boundsDelta - timeRemoved);
-            Vector3 lerpPosition = last.position.Lerp(first.position, lerpWeightApproximation);
-            Vector3 lerpRotation = last.rotation.Lerp(first.rotation, lerpWeightApproximation);
+            Vector3 lerpPosition = last.Position.Lerp(first.Position, lerpWeightApproximation);
+            Vector3 lerpRotation = last.Rotation.Lerp(first.Rotation, lerpWeightApproximation);
 
             // Remove extra keyframes and add interpolated keyframe
             for (int i = 0; i < currentLastMarker; i++) {
@@ -49,7 +49,7 @@ public class ObjectHistory {
         int positionCount = _positionHistory.Count;
         if (positionCount != 0) {
             PositionKeyframe removedKeyframe = _positionHistory[positionCount - 1];
-            _currentTimeStored -= removedKeyframe.delta;
+            _currentTimeStored -= removedKeyframe.Delta;
             _positionHistory.RemoveAt(positionCount - 1);
             return removedKeyframe;
         }

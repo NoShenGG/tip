@@ -1,6 +1,6 @@
 using Godot;
 
-using Tip.Scripts.TimeMechanics;
+namespace Tip.Scripts;
 
 public partial class Player : CharacterBody3D {
 	[ExportCategory("Movement")]
