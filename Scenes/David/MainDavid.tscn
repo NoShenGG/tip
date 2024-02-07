@@ -1,5 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://rmh7xf305yxq"]
+[gd_scene load_steps=19 format=3 uid="uid://rmh7xf305yxq"]
 
+[ext_resource type="Texture2D" uid="uid://p4cq0akituxu" path="res://Assets/skybox.png" id="1_r8t1u"]
 [ext_resource type="PackedScene" uid="uid://bq7jj8c7sqndr" path="res://Prefabs/Player.tscn" id="2_61onl"]
 [ext_resource type="Script" path="res://Scripts/DeathPlane.cs" id="3_hgmoi"]
 [ext_resource type="Texture2D" uid="uid://cxgymaqrwks2x" path="res://_Prototype/Orange/texture_01.png" id="3_vv40x"]
@@ -10,12 +11,11 @@
 [ext_resource type="Script" path="res://Scripts/Keystone.cs" id="8_t344l"]
 [ext_resource type="Script" path="res://Scripts/Keyhole.cs" id="9_gst5g"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_atars"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_xuhe8"]
+panorama = ExtResource("1_r8t1u")
 
 [sub_resource type="Sky" id="Sky_ce3p3"]
-sky_material = SubResource("ProceduralSkyMaterial_atars")
+sky_material = SubResource("PanoramaSkyMaterial_xuhe8")
 
 [sub_resource type="Environment" id="Environment_dmjg3"]
 background_mode = 2
@@ -47,6 +47,7 @@ environment = SubResource("Environment_dmjg3")
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 light_energy = 0.4
 shadow_enabled = true
+shadow_opacity = 0.8
 
 [node name="Player" parent="." instance=ExtResource("2_61onl")]
 process_mode = 3
