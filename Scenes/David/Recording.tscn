@@ -133,7 +133,7 @@ transform = Transform3D(1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, 0, 0, -0.485317)
 shape = SubResource("BoxShape3D_bvdy7")
 
 [node name="PhantomCamera3D" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6.99098, 7.52755, 5.56903)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.99098, 7.52755, 5.56903)
 script = ExtResource("10_0tc25")
 priority_override = false
 priority = 0

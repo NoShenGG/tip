@@ -107,12 +107,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.22209, 0.366562, 6.93401)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0079875, -4.76837e-07, 0.0237651)
 
 [node name="Keyhole" type="Node3D" parent="BasicBoxRoom/Elements/KeySystem"]
-transform = Transform3D(-3.58433e-08, 0, -0.82, 0, 0.82, 0, 0.82, 0, -3.58433e-08, -10.2523, 0, -2.03419)
+transform = Transform3D(-3.58433e-08, 0, -0.82, 0, 0.82, 0, 0.82, 0, -3.58433e-08, -8.79445, 2.13934, -1.55904)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="BasicBoxRoom/Elements/KeySystem/Keyhole"]
-transform = Transform3D(1, -6.65068e-12, 2.91038e-11, -6.861e-11, 1, 0, 0, 0, 1, 0, 1.23979, -0.869586)
+transform = Transform3D(1, -6.65068e-12, 2.91003e-11, -6.861e-11, 1, 0, 0, -2.06795e-25, 1, 0.554497, -1.26672, 1.03636)
 material_override = SubResource("StandardMaterial3D_06sd3")
 operation = 2
+use_collision = true
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="BasicBoxRoom/Elements/KeySystem/Keyhole/CSGCombiner3D"]
 transform = Transform3D(5.47941, 0, 0, 0, 5.47941, 0, 0, 0, 5.47941, -0.449539, 1.55339, -1.54109)
@@ -123,12 +124,14 @@ transform = Transform3D(1.95605, 0, 0, 0, 1.95605, 0, 0, 0, 1.95605, -0.42218, 1
 operation = 2
 
 [node name="Area3D" type="Area3D" parent="BasicBoxRoom/Elements/KeySystem/Keyhole"]
-transform = Transform3D(1, -6.65068e-12, 2.91038e-11, -6.861e-11, 1, 0, 0, 0, 1, -0.422704, 2.56235, -2.8194)
+transform = Transform3D(1, -6.65068e-12, 2.91003e-11, -6.861e-11, 1, 0, 0, -2.06795e-25, 1, 0.131793, 0.0558362, -0.913459)
 script = ExtResource("9_gst5g")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BasicBoxRoom/Elements/KeySystem/Keyhole/Area3D"]
 transform = Transform3D(1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, 0, 0, -0.485317)
 shape = SubResource("BoxShape3D_bvdy7")
+
+[node name="ForceGrab" type="Area3D" parent="BasicBoxRoom/Elements/KeySystem/Keyhole"]
 
 [node name="Keystone" parent="BasicBoxRoom/Elements/KeySystem" instance=ExtResource("5_5kga6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.782595, 0.937902, -0.246933)
