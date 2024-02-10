@@ -117,7 +117,7 @@ operation = 2
 use_collision = true
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="BasicBoxRoom/Elements/KeySystem/Keyhole/CSGCombiner3D"]
-transform = Transform3D(5.47941, 0, 0, 0, 5.47941, 0, 0, 0, 5.47941, -0.449539, 1.55339, -1.54109)
+transform = Transform3D(5.47941, -3.46945e-18, 0, 0, 5.47941, 0, -2.84217e-14, 1.03398e-25, 5.47941, -0.449539, 1.55339, -1.54109)
 size = Vector3(1, 1, 0.670898)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="BasicBoxRoom/Elements/KeySystem/Keyhole/CSGCombiner3D"]
