@@ -4,6 +4,7 @@ namespace Tip.Scripts.TimeMechanics;
 
 public abstract partial class TimeObject : RigidBody3D {
     protected ObjectHistory Keyframes;
+    protected TimeState _currentTimeState;
     private bool _isReversing;
     private PositionKeyframe _reversalKeyframe;
     private Timer _rewindTimer;
@@ -52,6 +53,7 @@ public abstract partial class TimeObject : RigidBody3D {
 
     // Necessary to control time behavior, don't modify unless you know what you're doing
     public void UpdateTimeBehavior(TimeState currentState) {
+        _currentTimeState = currentState;
         switch (currentState) {
             case TimeState.Normal:
                 _isReversing = false;

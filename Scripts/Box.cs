@@ -12,6 +12,7 @@ public partial class Box : TimeObject
 	[Export] private float _trackModifier = 20.0f;
 
 	private Node3D _pickUpPos;
+	private bool _handlePickup;
 
 	public override void _Ready() {
 		base._Ready();
@@ -27,15 +28,25 @@ public partial class Box : TimeObject
 	}
 
 	public override void _PhysicsProcess(double delta) {
-		if (IsInstanceValid(_pickUpPos)) {
+		if (IsInstanceValid(_pickUpPos) && _currentTimeState != TimeState.Rewinding) {
+			Freeze = false;
 			Vector3 dir = GlobalPosition.DirectionTo(_pickUpPos.GlobalPosition).Normalized();
 			float mag = GlobalPosition.DistanceTo(_pickUpPos.GlobalPosition);
 
 			LinearVelocity = dir * mag * _trackModifier;
 			Rotation = _pickUpPos.GlobalRotation;
 			Rotation = new Vector3(0, Rotation.Y, Rotation.Z);
+			if (_currentTimeState == TimeState.Normal) {
+				base._PhysicsProcess(delta);
+			}
+		} else if (_currentTimeState == TimeState.Stopped) {
+			Freeze = true;
+			_pickUpPos = null;
+			base._PhysicsProcess(delta);
+		} else {
+			_pickUpPos = null;
+			base._PhysicsProcess(delta);
 		}
-		base._PhysicsProcess(delta);
 	}
 
 	public void SetPickupPos(Node3D pickUpPos) {
