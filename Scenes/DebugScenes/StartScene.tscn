@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://dajf8emti5ges"]
+
+[ext_resource type="Script" path="res://Scripts/StartGame.cs" id="1_4rdpe"]
+
+[node name="StartScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4rdpe")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.434
+anchor_top = 0.386
+anchor_right = 0.535
+anchor_bottom = 0.434
+offset_left = 0.0319824
+offset_top = -0.128006
+offset_right = -0.320007
+offset_bottom = -0.231995
+text = "Start Game"
+
+[connection signal="pressed" from="Button" to="." method="onButtonPressed"]
