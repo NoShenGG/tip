@@ -32,6 +32,13 @@ public partial class Player : CharacterBody3D {
 	public override void _Process(double delta) {
 		
 	}
+
+	public void _DropItem() {
+		if (_heldItem != null) {
+			_heldItem.SetPickupPos(null);
+			_heldItem = null;
+		}
+	}
 	
 	// Called every physics update
 	public override void _PhysicsProcess(double delta) {
