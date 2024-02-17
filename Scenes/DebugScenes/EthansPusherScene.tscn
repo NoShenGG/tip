@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://d0i42q75cbu10"]
+[gd_scene load_steps=21 format=3 uid="uid://b8vks0661s0a6"]
 
 [ext_resource type="Texture2D" uid="uid://p4cq0akituxu" path="res://Assets/skybox.png" id="1_3ilnc"]
 [ext_resource type="PackedScene" uid="uid://bq7jj8c7sqndr" path="res://Prefabs/Player.tscn" id="2_6g8ys"]
@@ -145,10 +145,16 @@ script = ExtResource("10_opelf")
 skeleton = NodePath("../../Keyhole")
 
 [node name="ForcePusher" parent="." instance=ExtResource("11_436ff")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.28493, 1.03924, 3.00695)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2841, 1.03924, 3.00695)
 script = ExtResource("12_aeh6j")
+
+[node name="ForcePuller" parent="." instance=ExtResource("11_436ff")]
+transform = Transform3D(-0.992208, 0.0523844, -0.113043, -0.0661282, -0.990389, 0.121476, -0.105594, 0.128004, 0.986136, 6.74428, 2.82123, 3.00695)
+script = ExtResource("12_aeh6j")
+isPuller = true
 
 [connection signal="body_entered" from="BasicBoxRoom/Elements/KeySystem/Keyhole/Area3D" to="BasicBoxRoom/Elements/KeySystem/Keyhole/Area3D" method="OnKeyholeBodyEntered"]
 [connection signal="body_entered" from="ForcePusher" to="ForcePusher" method="_OnForcePusherBodyEntered"]
+[connection signal="body_entered" from="ForcePuller" to="ForcePuller" method="_OnForcePusherBodyEntered"]
 
 [editable path="BasicBoxRoom/Elements/KeySystem/Keystone"]
