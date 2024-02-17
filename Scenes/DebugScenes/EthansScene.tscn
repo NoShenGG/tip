@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bvjkbg12qd8xn"]
+[gd_scene load_steps=15 format=3 uid="uid://1j6fwp3n1155"]
 
 [ext_resource type="PackedScene" uid="uid://bq7jj8c7sqndr" path="res://Prefabs/Player.tscn" id="2_lr288"]
 [ext_resource type="Script" path="res://Scripts/DeathPlane.cs" id="3_jcsud"]

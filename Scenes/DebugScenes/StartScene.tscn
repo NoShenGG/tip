@@ -1,6 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://dajf8emti5ges"]
+[gd_scene load_steps=2 format=3 uid="uid://d16wltmydfs1y"]
 
-[ext_resource type="Script" path="res://Scripts/StartGame.cs" id="1_4rdpe"]
+[sub_resource type="CSharpScript" id="CSharpScript_22i2p"]
+script/source = "using Godot;
+using System;
+
+public partial class StartGame : Control
+{
+
+	// Called when the node enters the scene tree for the first time.
+	public void onButtonPressed()
+	{
+		GetTree().ChangeSceneToFile(\"res://Scenes/DebugScenes/LoadingScene.tscn\");
+	}
+
+}
+"
 
 [node name="StartScene" type="Control"]
 layout_mode = 3
@@ -9,7 +23,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_4rdpe")
+script = SubResource("CSharpScript_22i2p")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 1
