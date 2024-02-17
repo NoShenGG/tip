@@ -1,33 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bd3vnceb25ykn"]
 
-[sub_resource type="CSharpScript" id="CSharpScript_pvoqh"]
-script/source = "using Godot;
-using System;
-using System.Text.RegularExpressions;
-
-public partial class LoadingScene : Control
-{
-	//Set as path to intended target scene
-	private const String targetScenePath = \"res://Scenes/DebugScenes/ExampleWorld.tscn\";
-	private ProgressBar progressBar;
-
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-		progressBar = GetNode<ProgressBar>(\"ProgressBar\");
-		GetTree().ChangeSceneToFile(\"res://Scenes/DebugScenes/ExampleWorld.tscn\");
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-		//TODO: make it work
-		//Lol I have no idea how to code a progress bar so I'm just gonna make it go to 100 :)))
-		progressBar.Value = 100;
-	}
-
-}
-"
+[ext_resource type="Script" path="res://Scripts/LoadingScene.cs" id="1_ur4ak"]
 
 [node name="LoadingScene" type="Control"]
 layout_mode = 3
@@ -36,16 +9,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = SubResource("CSharpScript_pvoqh")
+script = ExtResource("1_ur4ak")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.252
-anchor_top = 0.415
-anchor_right = 0.632
-anchor_bottom = 0.457
-offset_left = -7.30402
-offset_top = 0.0799866
-offset_right = -0.0640259
-offset_bottom = -0.136017
+anchor_left = 0.295
+anchor_top = 0.465
+anchor_right = 0.681
+anchor_bottom = 0.506
+offset_left = 0.159973
+offset_top = -0.320038
+offset_right = 0.487915
+offset_bottom = 0.111938
