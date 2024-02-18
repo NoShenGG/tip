@@ -152,10 +152,4 @@ public partial class Player : CharacterBody3D {
 		_head.Rotation = clampedRotation;
 	}
 	#endregion
-
-	#region Resets
-
-	public 
-
-	#endregion
 }
