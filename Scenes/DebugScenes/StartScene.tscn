@@ -1,20 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://d16wltmydfs1y"]
+[gd_scene load_steps=2 format=3 uid="uid://dkbywpu12oe2c"]
 
-[sub_resource type="CSharpScript" id="CSharpScript_22i2p"]
-script/source = "using Godot;
-using System;
-
-public partial class StartGame : Control
-{
-
-	// Called when the node enters the scene tree for the first time.
-	public void onButtonPressed()
-	{
-		GetTree().ChangeSceneToFile(\"res://Scenes/DebugScenes/LoadingScene.tscn\");
-	}
-
-}
-"
+[ext_resource type="Script" path="res://Scripts/StartGame.cs" id="1_4rdpe"]
 
 [node name="StartScene" type="Control"]
 layout_mode = 3
@@ -23,19 +9,44 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = SubResource("CSharpScript_22i2p")
+script = ExtResource("1_4rdpe")
 
-[node name="Button" type="Button" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.434
-anchor_top = 0.386
-anchor_right = 0.535
-anchor_bottom = 0.434
-offset_left = 0.0319824
-offset_top = -0.128006
-offset_right = -0.320007
-offset_bottom = -0.231995
-text = "Start Game"
+anchor_left = 0.381
+anchor_top = 0.306
+anchor_right = 0.59
+anchor_bottom = 0.56
+offset_left = 0.0879822
+offset_top = -0.28801
+offset_right = -30.6801
+offset_bottom = -20.88
+scale = Vector2(1.145, 1.145)
+alignment = 1
 
-[connection signal="pressed" from="Button" to="." method="onButtonPressed"]
+[node name="Start Game" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "New Game
+"
+icon_alignment = 1
+
+[node name="Load Save" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Load Save
+"
+icon_alignment = 1
+
+[node name="Settings" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+icon_alignment = 1
+
+[node name="Quit Game" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Quit Game"
+icon_alignment = 1
+
+[connection signal="pressed" from="VBoxContainer/Start Game" to="." method="onStartButtonPressed"]
+[connection signal="pressed" from="VBoxContainer/Settings" to="." method="onSettingsPressed"]
+[connection signal="pressed" from="VBoxContainer/Quit Game" to="." method="onQuitButtonPressed"]

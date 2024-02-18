@@ -1,0 +1,101 @@
+[gd_scene load_steps=6 format=3 uid="uid://ck8egbnui0ve5"]
+
+[ext_resource type="Script" path="res://Scripts/WindowOption.cs" id="1_icekh"]
+[ext_resource type="Script" path="res://Scripts/SettingsScript.cs" id="1_kkidx"]
+[ext_resource type="Script" path="res://Scripts/AntiAliasing.cs" id="3_7jtff"]
+
+[sub_resource type="SystemFont" id="SystemFont_6u0oj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jshc3"]
+font = SubResource("SystemFont_6u0oj")
+font_size = 26
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kkidx")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Video" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Video"]
+layout_direction = 2
+layout_mode = 2
+offset_left = 51.0
+offset_top = 18.0
+offset_right = 1152.0
+offset_bottom = 620.0
+columns = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Video/GridContainer"]
+layout_mode = 2
+
+[node name="DisplayMode" type="Label" parent="TabContainer/Video/GridContainer/VBoxContainer"]
+layout_mode = 2
+text = "Display Mode:                                                                                                           "
+label_settings = SubResource("LabelSettings_jshc3")
+
+[node name="AntiAliasing" type="Label" parent="TabContainer/Video/GridContainer/VBoxContainer"]
+layout_mode = 2
+text = "Anti Aliasing:                                                                                             "
+label_settings = SubResource("LabelSettings_jshc3")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="TabContainer/Video/GridContainer"]
+layout_direction = 3
+layout_mode = 2
+
+[node name="DisplayOptionButton" type="OptionButton" parent="TabContainer/Video/GridContainer/VBoxContainer2"]
+layout_mode = 2
+alignment = 2
+item_count = 2
+popup/item_0/text = "Windowed"
+popup/item_0/id = 0
+popup/item_1/text = "Fullscreen"
+popup/item_1/id = 1
+script = ExtResource("1_icekh")
+
+[node name="DisplayOptionButton2" type="OptionButton" parent="TabContainer/Video/GridContainer/VBoxContainer2"]
+layout_mode = 2
+alignment = 2
+item_count = 4
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "SSAA"
+popup/item_1/id = 1
+popup/item_2/text = "MSAA 2x"
+popup/item_2/id = 2
+popup/item_3/text = "MSAA 4x"
+popup/item_3/id = 3
+script = ExtResource("3_7jtff")
+
+[node name="Audio" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.016
+anchor_top = 0.906
+anchor_right = 0.092
+anchor_bottom = 0.974
+offset_left = 0.567999
+offset_top = -0.0880127
+offset_right = 0.0159912
+offset_bottom = -0.152039
+text = "Back
+"
+
+[connection signal="pressed" from="BackButton" to="." method="onBackButtonPressed"]
