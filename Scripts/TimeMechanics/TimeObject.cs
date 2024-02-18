@@ -2,7 +2,7 @@
 
 namespace Tip.Scripts.TimeMechanics;
 
-public abstract partial class TimeObject : RigidBody3D {
+public abstract partial class TimeObject : RigidBody3D, TimeSubscriber {
     protected ObjectHistory Keyframes;
     protected TimeState _currentTimeState;
     private bool _isReversing;

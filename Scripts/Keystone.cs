@@ -16,7 +16,6 @@ public partial class Keystone : Box
         {
             GD.Print("Keystone was inserted into force grabber!");
 			Player player = GetNode<Player>("../Player");
-			player._DropItem();
 			this.Position = Vector3.Zero;
 
         }

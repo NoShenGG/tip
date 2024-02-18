@@ -1,8 +1,12 @@
 using Godot;
+using Tip.Scripts.TimeMechanics;
 
 namespace Tip.Scripts;
 
-public partial class Player : CharacterBody3D {
+public partial class Player : CharacterBody3D, TimeSubscriber {
+	
+	#region Movement Variables
+	
 	private const float MaxVelocityAir = 0.6f;
 	private const float MaxVelocityGround = 6.0f;
 	private const float MaxAcceleration = 10 * MaxVelocityGround;
@@ -12,13 +16,28 @@ public partial class Player : CharacterBody3D {
 	[ExportCategory("Movement")]
 	[Export] private float _friction = 4f;
 	
+	#endregion
+	
+	#region Input Variables
+	
 	[ExportCategory("Input")]
 	[Export] private float _sensitivity = 0.5f;
 	private Node3D _head;
+	private Node3D _pickupPos;
 	private Vector3 _movementDir;
 	private bool _isJump;
+	
+	#endregion
+	
+	#region Pickup Variables
+	
+	[ExportCategory("Pickup")]
+	[Export] private float _pickUpTrackModifier = 20.0f;
+	private TimeState _currentTimeState;
 	private bool _checkPickup;
 	private Box _heldItem;
+	
+	#endregion
 	
 	#region Godot Override
 	// Called when the node enters the scene tree for the first time.
@@ -26,36 +45,69 @@ public partial class Player : CharacterBody3D {
 		// Locks player mouse to center of screen and hides it for first person controls
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 		_head = GetNode<Node3D>("Head");
+		_pickupPos = GetNode<Node3D>("Head/Camera3D/PickupPos");
+		
+		// This is NECESSARY to control time behavior. DO NOT TOUCH
+		GetNode<TimeManager>("/root/TimeManager").AddSubscriber(this);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta) {
 		
 	}
-
-	public void _DropItem() {
-		if (_heldItem != null) {
-			_heldItem.SetPickupPos(null);
-			_heldItem = null;
-		}
-	}
 	
 	// Called every physics update
 	public override void _PhysicsProcess(double delta) {
 		ProcessMovementInput();
 		ProcessMovement(delta);
-
-		// TODO This is hacky and jank and should be abstracted better at some point
+		
+		// Grab instance for pick up
 		if (_checkPickup) {
-			if (_heldItem == null) {
+			if (!IsInstanceValid(_heldItem)) {
 				RayCast3D raycast = GetNode<RayCast3D>("Head/Camera3D/PickupRaycast");
 				if (raycast.GetCollider() is Box box) {
 					_heldItem = box;
-					box.SetPickupPos(GetNode<Node3D>("Head/Camera3D/PickupPos"));
 				}
 			} else {
-				_heldItem.SetPickupPos(null);
+				_heldItem.EnableTimeBehavior = true;
+				if (_currentTimeState != TimeState.Normal) {
+					_heldItem.Freeze = true;
+				}
 				_heldItem = null;
+			}
+		}
+		
+		// Handle pick up physics
+		if (IsInstanceValid(_heldItem)) {
+			switch (_currentTimeState) {
+				case TimeState.Normal:
+					_heldItem.EnableTimeBehavior = true;
+					break;
+				case TimeState.Rewinding:
+					_heldItem.EnableTimeBehavior = true;
+					_heldItem = null;
+					break;
+				case TimeState.Stopped:
+					_heldItem.EnableTimeBehavior = false;
+					_heldItem.Freeze = false;
+					break;
+				default:
+					GD.PrintErr("Unhandled TimeState!");
+					break;
+			}
+
+			// Double-check held item valid after time changes
+			if (IsInstanceValid(_heldItem)) {
+				Vector3 dir = _heldItem.GlobalPosition.DirectionTo(_pickupPos.GlobalPosition);
+				float mag = _heldItem.GlobalPosition.DistanceTo(_pickupPos.GlobalPosition);
+				
+				if (mag > 1) {
+					_heldItem = null;
+				} else {
+					_heldItem.LinearVelocity = dir * mag * _pickUpTrackModifier;
+					_heldItem.Rotation = _pickupPos.GlobalRotation;
+					_heldItem.Rotation = new Vector3(0, _heldItem.Rotation.Y, _heldItem.Rotation.Z);
+				}
 			}
 		}
 		
@@ -151,5 +203,14 @@ public partial class Player : CharacterBody3D {
 			_head.Rotation.Z);
 		_head.Rotation = clampedRotation;
 	}
+	#endregion
+
+	#region Time-related Methods
+
+	// Necessary to control time behavior, don't modify unless you know what you're doing
+	public void UpdateTimeBehavior(TimeState currentState) {
+		_currentTimeState = currentState;
+	}
+
 	#endregion
 }
