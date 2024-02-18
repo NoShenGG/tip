@@ -10,12 +10,12 @@ public partial class TimeManager : Node {
     // THIS SHOULD BE ACCESSIBLE VIA THE METHODS DESCRIBED HERE
     // https://docs.godotengine.org/en/stable/tutorials/scripting/singletons_autoload.html
 
-    private List<TimeObject> _subscribers;
+    private List<TimeSubscriber> _subscribers;
     private TimeState _currentTimeState;
 
     public override void _Ready() {
         base._Ready();
-        _subscribers = new List<TimeObject>();
+        _subscribers = new List<TimeSubscriber>();
         _currentTimeState = TimeState.Normal;
     }
     
@@ -24,7 +24,7 @@ public partial class TimeManager : Node {
     /// <para><b>Should be called by default in all TimeObjects.</b></para>
     /// </summary>
     /// <param name="newSubscriber">the new TimeObject to add to the list of TimeManager subscribers</param>
-    public void AddSubscriber(TimeObject newSubscriber) {
+    public void AddSubscriber(TimeSubscriber newSubscriber) {
         _subscribers.Add(newSubscriber);
     }
     
@@ -35,7 +35,7 @@ public partial class TimeManager : Node {
     /// <param name="currentSubscriber">the TimeObject to remove from the list of TimeObjects</param>
     /// <returns>True: if subscriber exists in subscriber list<br/>
     /// False: if subscriber does not exist in subscriber list</returns>
-    public bool RemoveSubscriber(TimeObject currentSubscriber) {
+    public bool RemoveSubscriber(TimeSubscriber currentSubscriber) {
         if (_subscribers.Contains(currentSubscriber)) {
             _subscribers.Remove(currentSubscriber);
             return true;
@@ -58,7 +58,7 @@ public partial class TimeManager : Node {
     }
 
     private void NotifySubscribers() {
-        foreach (TimeObject t in _subscribers) {
+        foreach (TimeSubscriber t in _subscribers) {
             t.UpdateTimeBehavior(_currentTimeState);
         }
     }
