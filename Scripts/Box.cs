@@ -33,9 +33,13 @@ public partial class Box : TimeObject
 			Vector3 dir = GlobalPosition.DirectionTo(_pickUpPos.GlobalPosition).Normalized();
 			float mag = GlobalPosition.DistanceTo(_pickUpPos.GlobalPosition);
 
-			LinearVelocity = dir * mag * _trackModifier;
-			Rotation = _pickUpPos.GlobalRotation;
-			Rotation = new Vector3(0, Rotation.Y, Rotation.Z);
+			if (mag > 1) {
+				_pickUpPos = null;
+			} else {
+				LinearVelocity = dir * mag * _trackModifier;
+				Rotation = _pickUpPos.GlobalRotation;
+				Rotation = new Vector3(0, Rotation.Y, Rotation.Z);
+			}
 			if (_currentTimeState == TimeState.Normal) {
 				base._PhysicsProcess(delta);
 			}
