@@ -13,12 +13,12 @@ public partial class Keystone : Box
 	public void OnForcegrabberEntered(Node3D body) 
 	{
 		if (body is Keystone keystone)
-        {
-            GD.Print("Keystone was inserted into force grabber!");
+		{
+			GD.Print("Keystone was inserted into force grabber!");
 			Player player = GetNode<Player>("../Player");
 			this.Position = Vector3.Zero;
 
-        }
+		}
 		
 	}
 }

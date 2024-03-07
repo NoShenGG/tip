@@ -91,6 +91,7 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-221.643, -111.287)
 modes/cull = 2
 flags/unshaded = true
 varyings/vertexNormal = "0,4"
@@ -99,18 +100,19 @@ nodes/vertex/2/position = Vector2(-340, 200)
 nodes/vertex/3/node = SubResource("VisualShaderNodeVaryingSetter_xv8bl")
 nodes/vertex/3/position = Vector2(46.7586, 252.459)
 nodes/vertex/connections = PackedInt32Array(2, 0, 3, 0)
+nodes/fragment/0/position = Vector2(820, 140)
 nodes/fragment/2/node = SubResource("VisualShaderNodeInput_uah37")
-nodes/fragment/2/position = Vector2(-560, 180)
+nodes/fragment/2/position = Vector2(-860, 100)
 nodes/fragment/3/node = SubResource("VisualShaderNodeVectorDecompose_7ug16")
-nodes/fragment/3/position = Vector2(-220, 200)
+nodes/fragment/3/position = Vector2(60, 220)
 nodes/fragment/5/node = SubResource("VisualShaderNodeColorConstant_3yndx")
-nodes/fragment/5/position = Vector2(-40, 100)
+nodes/fragment/5/position = Vector2(180, -80)
 nodes/fragment/7/node = SubResource("VisualShaderNodeFloatOp_bhill")
-nodes/fragment/7/position = Vector2(180, 360)
+nodes/fragment/7/position = Vector2(400, 400)
 nodes/fragment/8/node = SubResource("VisualShaderNodeVectorDecompose_esvog")
-nodes/fragment/8/position = Vector2(-300, 400)
+nodes/fragment/8/position = Vector2(-380, 520)
 nodes/fragment/10/node = SubResource("VisualShaderNodeFloatOp_u6ad2")
-nodes/fragment/10/position = Vector2(-40, 520)
+nodes/fragment/10/position = Vector2(20, 580)
 nodes/fragment/11/node = SubResource("VisualShaderNodeVaryingGetter_7dq8o")
-nodes/fragment/11/position = Vector2(-663.076, 426.296)
+nodes/fragment/11/position = Vector2(-840, 580)
 nodes/fragment/connections = PackedInt32Array(2, 0, 3, 0, 5, 0, 0, 0, 8, 1, 10, 0, 7, 0, 0, 1, 10, 0, 7, 1, 3, 1, 7, 0, 11, 0, 8, 0)
