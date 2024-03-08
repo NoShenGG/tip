@@ -33,6 +33,7 @@ public partial class Player : CharacterBody3D, TimeSubscriber {
 	
 	[ExportCategory("Pickup")]
 	[Export] private float _pickUpTrackModifier = 20.0f;
+	[Export] private float _maxPickupVelocity = 10.0f;
 	private TimeState _currentTimeState;
 	private bool _checkPickup;
 	private Box _heldItem;
@@ -101,7 +102,7 @@ public partial class Player : CharacterBody3D, TimeSubscriber {
 				Vector3 dir = _heldItem.GlobalPosition.DirectionTo(_pickupPos.GlobalPosition);
 				float mag = _heldItem.GlobalPosition.DistanceTo(_pickupPos.GlobalPosition);
 				
-				if (mag > 1) {
+				if (mag > _maxPickupVelocity) {
 					_heldItem = null;
 				} else {
 					_heldItem.LinearVelocity = dir * mag * _pickUpTrackModifier;
