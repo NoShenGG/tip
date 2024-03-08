@@ -67,13 +67,19 @@ public partial class Player : CharacterBody3D, TimeSubscriber {
 			if (!IsInstanceValid(_heldItem)) {
 				RayCast3D raycast = GetNode<RayCast3D>("Head/Camera3D/PickupRaycast");
 				if (raycast.GetCollider() is Box box) {
-					_heldItem = box;
+					// TODO Change this to not be like this omg this sucks actually
+					if (box is not Platform) {
+						_heldItem = box;
+						_heldItem.AngularVelocity = Vector3.Zero;
+					}
 				}
 			} else {
 				_heldItem.EnableTimeBehavior = true;
 				if (_currentTimeState != TimeState.Normal) {
 					_heldItem.Freeze = true;
 				}
+
+				_heldItem.AngularVelocity = Vector3.Zero;
 				_heldItem = null;
 			}
 		}

@@ -1,12 +1,13 @@
-[gd_scene load_steps=18 format=3 uid="uid://cpmjt7h6bh6yb"]
+[gd_scene load_steps=17 format=3 uid="uid://cpmjt7h6bh6yb"]
 
 [ext_resource type="Texture2D" uid="uid://p4cq0akituxu" path="res://Assets/skybox.png" id="1_miutx"]
 [ext_resource type="PackedScene" uid="uid://bq7jj8c7sqndr" path="res://Prefabs/Player.tscn" id="2_bpe4b"]
 [ext_resource type="Texture2D" uid="uid://cmavs81v1lh6h" path="res://_Prototype/Dark/texture_01.png" id="3_efvia"]
 [ext_resource type="Script" path="res://Scripts/DeathPlane.cs" id="4_bkfsa"]
 [ext_resource type="PackedScene" uid="uid://bfublhg2eklou" path="res://Prefabs/PuzzleElements/Box.tscn" id="4_mwetq"]
-[ext_resource type="PackedScene" uid="uid://dbvxonk7dvr04" path="res://Prefabs/PuzzleElements/Platform.tscn" id="5_i0602"]
-[ext_resource type="Script" path="res://Scripts/Box.cs" id="6_828x7"]
+[ext_resource type="PackedScene" uid="uid://d3g1llkm5tfb0" path="res://Scenes/Models/Platform.tscn" id="5_eu1c6"]
+[ext_resource type="PackedScene" uid="uid://rnp0uph34ikj" path="res://Scenes/Models/Keystone.tscn" id="6_cgpd2"]
+[ext_resource type="PackedScene" uid="uid://bpeptod0bu0b" path="res://Scenes/Models/Keyhole.tscn" id="7_wqp84"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1iwyd"]
 panorama = ExtResource("1_miutx")
@@ -24,15 +25,9 @@ glow_enabled = true
 albedo_texture = ExtResource("3_efvia")
 uv1_triplanar = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yjecr"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_soh23"]
-material = SubResource("StandardMaterial3D_yjecr")
-size = Vector3(2, 0.2, 2)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_t10y4"]
-size = Vector3(2, 0.2, 2)
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_g8se5"]
+friction = 0.0
+bounce = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bf20a"]
 albedo_color = Color(0.635294, 0, 0, 1)
@@ -97,9 +92,9 @@ operation = 2
 size = Vector3(38.8607, 5.76392, 9.40461)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="BoxRoom/TheRats/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5039, 2.0813, -2.75461)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5039, 2.0813, 1.11383)
 operation = 2
-size = Vector3(2.4967, 5.1626, 5.54156)
+size = Vector3(2.4967, 5.1626, 3.39084)
 
 [node name="RubberRoom" type="CSGCombiner3D" parent="BoxRoom"]
 
@@ -135,28 +130,39 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.4856, 3.13745, 2.9924)
 size = Vector3(44.643, 16.7251, 1.398)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="BoxRoom"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6967, 8.61999, -7.0512)
-size = Vector3(4.69196, 1, 5.66968)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.3504, 8.61999, -5.96175)
+size = Vector3(4.69196, 1, 9.05536)
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="CSGBox3D2" type="CSGBox3D" parent="BoxRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.60732, 0.642187)
+size = Vector3(1, 1, 3.88574)
 
-[node name="Box" parent="Node3D" instance=ExtResource("4_mwetq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5232, 10.4821, -7.83788)
-_spawnPos = Vector3(12.523, 10.482, -7.838)
+[node name="CSGBox3D3" type="CSGBox3D" parent="BoxRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.59473, 2.60732, -0.752832)
+size = Vector3(4.18945, 1, 1.0957)
 
-[node name="Platform" parent="Node3D" instance=ExtResource("5_i0602")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5476, 9.15869, -2.49787)
+[node name="SandboxDivider" type="CSGBox3D" parent="BoxRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.7189, 4.75378, -3.74543)
+size = Vector3(1, 16.0676, 13.3647)
+
+[node name="Elements" type="Node3D" parent="."]
+
+[node name="Platform" parent="Elements" instance=ExtResource("5_eu1c6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5476, 9.15869, 0.871061)
 collision_mask = 2
-lock_rotation = true
-script = ExtResource("6_828x7")
-_spawnPos = Vector3(12.548, 9.159, -2.498)
+_spawnPos = Vector3(12.5476, 9.15869, 0.871061)
 
-[node name="MeshInstance3D" parent="Node3D/Platform" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0391006, 0, 0)
-mesh = SubResource("BoxMesh_soh23")
+[node name="Keystone" parent="Elements" instance=ExtResource("6_cgpd2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.4007, 10.4566, -7.81056)
+_spawnPos = Vector3(14.3412, 10.4566, -7.81056)
 
-[node name="CollisionShape3D" parent="Node3D/Platform" index="1"]
-shape = SubResource("BoxShape3D_t10y4")
+[node name="Keyhole" parent="Elements" instance=ExtResource("7_wqp84")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.79283, 3.10682, 1.05401)
+
+[node name="Box" parent="Elements" instance=ExtResource("4_mwetq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.7878, 1.56184, 0)
+physics_material_override = SubResource("PhysicsMaterial_g8se5")
+_spawnPos = Vector3(43.7878, 1.56184, 0)
 
 [node name="DeathPlane" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.9754, -10.1722, 0)
@@ -170,4 +176,7 @@ script = ExtResource("4_bkfsa")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DeathPlane/Area3D"]
 shape = SubResource("BoxShape3D_rmrxc")
 
-[editable path="Node3D/Platform"]
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 35.4825, 4.07127, -3.44984)
+text = "SANDBOX HERE"
+font_size = 128

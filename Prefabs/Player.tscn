@@ -28,7 +28,9 @@ hit_back_faces = false
 [node name="PickupPos" type="Node3D" parent="Head/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 
-[node name="TextureRect" type="TextureRect" parent="Head/Camera3D"]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -43,3 +45,31 @@ grow_vertical = 2
 texture = ExtResource("2_sc5pm")
 expand_mode = 2
 stretch_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 9.0
+offset_top = 4.0
+offset_right = 272.0
+offset_bottom = 235.0
+text = "Controls: 
+WASD - Move
+Space/MWHEELDOWN - Jump
+Mouse - Look Around
+Left Click - Stop Time
+Right Click - Rewind Time (10 secs)
+R - Resume Normal Time
+E - Pick Up Objects
+Backspace - Reset Level
+"
+
+[node name="SandboxAreaText" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -106.0
+offset_top = 202.0
+offset_right = 111.0
+offset_bottom = 225.0
+grow_horizontal = 2
+text = "SANDBOX AREA UNLOCKED!"

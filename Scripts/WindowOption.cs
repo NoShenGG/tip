@@ -17,7 +17,7 @@ public partial class WindowOption : OptionButton
 				DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
 				break;
 			case 1:
-				DisplayServer.WindowSetMode(DisplayServer.WindowMode.Maximized);
+				DisplayServer.WindowSetMode(DisplayServer.WindowMode.ExclusiveFullscreen);
 				break;
 			default:
 				break;
