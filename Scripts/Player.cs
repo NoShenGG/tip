@@ -123,8 +123,6 @@ public partial class Player : CharacterBody3D, TimeSubscriber {
 			HandleCameraRotation(mouseMotion);
 		} else if (@event.IsActionPressed("interact") && Input.MouseMode.Equals(Input.MouseModeEnum.Captured)) {
 			_checkPickup = true;
-		} else if (@event.IsActionPressed("DEBUG_RESET")) {
-			GetTree().ReloadCurrentScene();
 		}
 	}
 	

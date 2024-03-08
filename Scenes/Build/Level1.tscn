@@ -63,6 +63,7 @@ shadow_opacity = 0.2
 [node name="Player" parent="." instance=ExtResource("2_bpe4b")]
 process_mode = 3
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1, -7)
+collision_mask = 3
 _sensitivity = 0.05
 _maxPickupVelocity = 2.0
 
@@ -133,14 +134,19 @@ size = Vector3(60, 12.1652, 2.413)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.4856, 3.13745, 2.9924)
 size = Vector3(44.643, 16.7251, 1.398)
 
+[node name="CSGBox3D" type="CSGBox3D" parent="BoxRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6967, 8.61999, -7.0512)
+size = Vector3(4.69196, 1, 5.66968)
+
 [node name="Node3D" type="Node3D" parent="."]
 
 [node name="Box" parent="Node3D" instance=ExtResource("4_mwetq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5232, 10.4821, -5.08186)
-_spawnPos = Vector3(12.523, 10.482, -4.804)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5232, 10.4821, -7.83788)
+_spawnPos = Vector3(12.523, 10.482, -7.838)
 
 [node name="Platform" parent="Node3D" instance=ExtResource("5_i0602")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5476, 9.15869, -2.49787)
+collision_mask = 2
 lock_rotation = true
 script = ExtResource("6_828x7")
 _spawnPos = Vector3(12.548, 9.159, -2.498)
@@ -158,6 +164,7 @@ mesh = SubResource("BoxMesh_p582r")
 skeleton = NodePath("Area3D")
 
 [node name="Area3D" type="Area3D" parent="DeathPlane"]
+collision_mask = 3
 script = ExtResource("4_bkfsa")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DeathPlane/Area3D"]

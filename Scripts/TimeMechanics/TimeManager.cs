@@ -62,4 +62,18 @@ public partial class TimeManager : Node {
             t.UpdateTimeBehavior(_currentTimeState);
         }
     }
+
+    public override void _Process(double delta) {
+        base._Process(delta);
+        GD.Print(_subscribers.Count);
+    }
+
+    public override void _UnhandledInput(InputEvent @event) {
+        if (@event.IsActionPressed("DEBUG_RESET")) {
+            _subscribers.Clear();
+            _currentTimeState = TimeState.Normal;
+            GetViewport().SetInputAsHandled();
+            GetTree().ReloadCurrentScene();
+        }
+    }
 }

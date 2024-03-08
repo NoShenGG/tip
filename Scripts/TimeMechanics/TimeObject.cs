@@ -47,7 +47,8 @@ public abstract partial class TimeObject : RigidBody3D, TimeSubscriber {
         base._Notification(what);
         // NECESSARY TO NOT HAVE A MEMORY LEAK AND BAD REFERENCES
         if (what == NotificationPredelete) {
-            GetNode<TimeManager>("/root/TimeManager").RemoveSubscriber(this);
+            // GetNode<TimeManager>("/root/TimeManager").RemoveSubscriber(this);
+            GD.Print("Removed upon deletion");
         }
     }
 
