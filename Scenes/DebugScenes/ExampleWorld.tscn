@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bp1v2a1emfy7d"]
+[gd_scene load_steps=15 format=3 uid="uid://dtb76ly756ru3"]
 
 [ext_resource type="PackedScene" uid="uid://bq7jj8c7sqndr" path="res://Prefabs/Player.tscn" id="1_dpnxn"]
 [ext_resource type="PackedScene" uid="uid://bpmd17evmlcy2" path="res://Prefabs/PuzzleElements/Button.tscn" id="2_4i3mg"]
@@ -41,7 +41,6 @@ shadow_enabled = true
 [node name="Player" parent="." instance=ExtResource("1_dpnxn")]
 process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.912464, 0)
-sensitivity = 0.12
 
 [node name="BasicBoxRoom" type="Node3D" parent="."]
 

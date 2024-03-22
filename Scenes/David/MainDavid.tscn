@@ -132,8 +132,6 @@ script = ExtResource("9_gst5g")
 transform = Transform3D(1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, 0, 0, -0.485317)
 shape = SubResource("BoxShape3D_bvdy7")
 
-[node name="ForceGrab" type="Area3D" parent="BasicBoxRoom/Elements/KeySystem/Keyhole"]
-
 [node name="Keystone" parent="BasicBoxRoom/Elements/KeySystem" instance=ExtResource("5_5kga6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.782595, 0.937902, -0.246933)
 physics_material_override = SubResource("PhysicsMaterial_yqey5")
