@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://yrbjrvsno6oe"]
+[gd_scene load_steps=24 format=3 uid="uid://yrbjrvsno6oe"]
 
 [ext_resource type="Texture2D" uid="uid://p4cq0akituxu" path="res://Assets/skybox.png" id="1_bijqs"]
 [ext_resource type="PackedScene" uid="uid://bq7jj8c7sqndr" path="res://Prefabs/Player.tscn" id="2_47a2w"]
@@ -11,9 +11,10 @@
 [ext_resource type="Script" path="res://Scripts/Keyhole.cs" id="9_1b4dw"]
 [ext_resource type="Script" path="res://Scripts/Keystone.cs" id="10_06tku"]
 [ext_resource type="Script" path="res://Scripts/LaserBlaster.cs" id="12_13hpw"]
-[ext_resource type="PackedScene" uid="uid://dthp8c3eggmju" path="res://Scenes/Models/Laser/PlasmaBolt.tscn" id="12_j75j3"]
-[ext_resource type="PackedScene" uid="uid://b00xs84c7ppsl" path="res://Scenes/Models/Laser/LaserBlaster.tscn" id="12_nm1of"]
+[ext_resource type="PackedScene" uid="uid://dthp8c3eggmju" path="res://Prefabs/Laser/PlasmaBolt.tscn" id="12_j75j3"]
+[ext_resource type="PackedScene" uid="uid://b00xs84c7ppsl" path="res://Prefabs/Laser/LaserBlaster.tscn" id="12_nm1of"]
 [ext_resource type="Script" path="res://Scripts/PlasmaBolt.cs" id="14_wc7ie"]
+[ext_resource type="AudioStream" uid="uid://c1fsn0od7m1n2" path="res://Sounds/77087__defunct3__laser-short.wav" id="15_vu0gy"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_xuhe8"]
 panorama = ExtResource("1_bijqs")
@@ -150,11 +151,14 @@ skeleton = NodePath("../../Keyhole")
 script = ExtResource("12_13hpw")
 
 [node name="PlasmaBolt" parent="BasicBoxRoom/LaserSystem/LaserBlaster" instance=ExtResource("12_j75j3")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.05095, 1.66643)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -5.13212, -0.25845, 6.44599)
 script = ExtResource("14_wc7ie")
-speed = 15.0
+speed = 20.0
+
+[node name="SoundLaser" type="AudioStreamPlayer3D" parent="BasicBoxRoom/LaserSystem/LaserBlaster/PlasmaBolt"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+stream = ExtResource("15_vu0gy")
 
 [connection signal="body_entered" from="BasicBoxRoom/Elements/KeySystem/Keyhole/Area3D" to="BasicBoxRoom/Elements/KeySystem/Keyhole/Area3D" method="OnKeyholeBodyEntered"]
-[connection signal="body_entered" from="BasicBoxRoom/LaserSystem/LaserBlaster/PlasmaBolt" to="BasicBoxRoom/LaserSystem/LaserBlaster/PlasmaBolt" method="OnPlayerEntered"]
 
 [editable path="BasicBoxRoom/Elements/KeySystem/Keystone"]

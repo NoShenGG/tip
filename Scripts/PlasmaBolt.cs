@@ -9,8 +9,8 @@ public partial class PlasmaBolt : Area3D
 	private Vector3 startPos = new Vector3(0, 1.051f, 1.666f);
 	public override void _Ready()
 	{
-		//Set the position to the muzzle of the turret
-		this.Position = startPos;
+		
+		shootLaser();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -20,7 +20,7 @@ public partial class PlasmaBolt : Area3D
 		if (Position.Z < 30) {
 			Position += new Vector3(0, 0, speed * (float) delta);
 		} else {
-			this.Position = startPos;
+			shootLaser();
 		}
 	}
 	
@@ -29,5 +29,12 @@ public partial class PlasmaBolt : Area3D
 		if (node is Player player) {
 			player.Position = Vector3.Up;
 		}
+	}
+
+	private void shootLaser() {
+		//Set the position to the muzzle of the turret
+		this.Position = startPos;
+		//Play shooty noise
+		GetNode<AudioStreamPlayer3D>("SoundLaser").Play();
 	}
 }
