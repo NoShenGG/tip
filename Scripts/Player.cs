@@ -33,6 +33,7 @@ public partial class Player : CharacterBody3D, TimeSubscriber {
 	
 	[ExportCategory("Pickup")]
 	[Export] private float _pickUpTrackModifier = 20.0f;
+	[Export] private float _maxPickupVelocity = 10.0f;
 	private TimeState _currentTimeState;
 	private bool _checkPickup;
 	private Box _heldItem;
@@ -66,13 +67,19 @@ public partial class Player : CharacterBody3D, TimeSubscriber {
 			if (!IsInstanceValid(_heldItem)) {
 				RayCast3D raycast = GetNode<RayCast3D>("Head/Camera3D/PickupRaycast");
 				if (raycast.GetCollider() is Box box) {
-					_heldItem = box;
+					// TODO Change this to not be like this omg this sucks actually
+					if (box is not Platform) {
+						_heldItem = box;
+						_heldItem.AngularVelocity = Vector3.Zero;
+					}
 				}
 			} else {
 				_heldItem.EnableTimeBehavior = true;
 				if (_currentTimeState != TimeState.Normal) {
 					_heldItem.Freeze = true;
 				}
+
+				_heldItem.AngularVelocity = Vector3.Zero;
 				_heldItem = null;
 			}
 		}
@@ -101,7 +108,7 @@ public partial class Player : CharacterBody3D, TimeSubscriber {
 				Vector3 dir = _heldItem.GlobalPosition.DirectionTo(_pickupPos.GlobalPosition);
 				float mag = _heldItem.GlobalPosition.DistanceTo(_pickupPos.GlobalPosition);
 				
-				if (mag > 1) {
+				if (mag > _maxPickupVelocity) {
 					_heldItem = null;
 				} else {
 					_heldItem.LinearVelocity = dir * mag * _pickUpTrackModifier;
@@ -122,8 +129,6 @@ public partial class Player : CharacterBody3D, TimeSubscriber {
 			HandleCameraRotation(mouseMotion);
 		} else if (@event.IsActionPressed("interact") && Input.MouseMode.Equals(Input.MouseModeEnum.Captured)) {
 			_checkPickup = true;
-		} else if (@event.IsActionPressed("DEBUG_RESET")) {
-			GetTree().ReloadCurrentScene();
 		}
 	}
 	

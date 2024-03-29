@@ -19,6 +19,8 @@ public abstract partial class TimeObject : RigidBody3D, TimeSubscriber {
         GetNode<TimeManager>("/root/TimeManager").AddSubscriber(this);
     }
 
+    // TODO update this to not rely on materials since we're starting to import new 3d assets
+    /*
     public override void _Process(double delta) {
         if (_isReversing) {
             StandardMaterial3D rewindMaterial = new StandardMaterial3D();
@@ -30,6 +32,7 @@ public abstract partial class TimeObject : RigidBody3D, TimeSubscriber {
             GetNode<MeshInstance3D>("MeshInstance3D").MaterialOverride = normalMaterial;
         }
     }
+    */
 
     public override void _PhysicsProcess(double delta) {
         if (_isReversing) {
@@ -47,7 +50,8 @@ public abstract partial class TimeObject : RigidBody3D, TimeSubscriber {
         base._Notification(what);
         // NECESSARY TO NOT HAVE A MEMORY LEAK AND BAD REFERENCES
         if (what == NotificationPredelete) {
-            GetNode<TimeManager>("/root/TimeManager").RemoveSubscriber(this);
+            // GetNode<TimeManager>("/root/TimeManager").RemoveSubscriber(this);
+            GD.Print("Removed upon deletion");
         }
     }
 

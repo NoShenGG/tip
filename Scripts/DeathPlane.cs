@@ -13,7 +13,8 @@ public partial class DeathPlane : Area3D
 		if (entity is Box box) {
 			box.Respawn();
 		} else if (entity is Player player) {
-			player.Position = Vector3.Up;
+			player.GlobalPosition = new Vector3(0, 1, -7);
+			player.GlobalRotation = new Vector3(0, Mathf.DegToRad(-90), 0);
 		}
 	}
 }

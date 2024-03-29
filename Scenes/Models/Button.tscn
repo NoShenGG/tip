@@ -81,7 +81,15 @@ metallic = 0.36
 albedo_color = Color(0.203922, 0.203922, 0.203922, 1)
 metallic = 0.33
 
-[node name="Button" type="StaticBody3D"]
+[node name="Button" type="RigidBody3D"]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+freeze = true
+freeze_mode = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.482567, -0.089221, 0.432321)

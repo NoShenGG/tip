@@ -17,6 +17,7 @@ public partial class TimeManager : Node {
         base._Ready();
         _subscribers = new List<TimeSubscriber>();
         _currentTimeState = TimeState.Normal;
+        GD.Print("Loaded!");
     }
     
     /// <summary>
@@ -61,5 +62,19 @@ public partial class TimeManager : Node {
         foreach (TimeSubscriber t in _subscribers) {
             t.UpdateTimeBehavior(_currentTimeState);
         }
+    }
+
+    public override void _UnhandledInput(InputEvent @event) {
+        if (@event.IsActionPressed("DEBUG_RESET")) {
+            Reset();
+            GetViewport().SetInputAsHandled();
+            Input.MouseMode = Input.MouseModeEnum.Visible;
+            GetTree().ChangeSceneToFile("res://Scenes/DebugScenes/StartScene.tscn");
+        }
+    }
+
+    public void Reset() {
+        _subscribers.Clear();
+        _currentTimeState = TimeState.Normal;
     }
 }
