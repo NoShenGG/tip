@@ -11,7 +11,9 @@ config_version=5
 [application]
 
 config/name="Tip"
-run/main_scene="res://Scenes/David/MainDavid.tscn"
+config/description="Tip Game Executable"
+config/version="1.0.0"
+run/main_scene="res://Scenes/DebugScenes/StartScene.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.png"
 config/windows_native_icon="res://icon.ico"
@@ -30,11 +32,6 @@ project/assembly_name="Tip"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/FMOD/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/input_helper/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
-
-[filesystem]
-
-import/blender/enabled=false
-import/fbx/enabled=false
 
 [fmod]
 
