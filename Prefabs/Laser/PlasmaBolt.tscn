@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dthp8c3eggmju"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_lte7a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jhmkl"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_osfl3"]
+radius = 0.0636188
+height = 1.02085
+
+[node name="PlasmaBolt" type="Area3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.5, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_lte7a")
+material = SubResource("StandardMaterial3D_jhmkl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000964165, 0.00188327, -0.00347614)
+shape = SubResource("CapsuleShape3D_osfl3")

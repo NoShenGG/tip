@@ -138,7 +138,7 @@ script = ExtResource("10_0tc25")
 
 [node name="RecordingCamera" type="Camera3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6.99098, 7.52755, 5.56903)
-fov = 74.722
+fov = 74.826
 script = ExtResource("11_wh8gm")
 
 [node name="PhantomCameraHost" type="Node" parent="RecordingCamera"]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b00xs84c7ppsl"]
+
+[ext_resource type="PackedScene" uid="uid://un2n6ixy64td" path="res://Scenes/Models/turret.glb" id="1_wq1o1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hbxxv"]
+size = Vector3(4.10217, 2.68761, 5.46631)
+
+[node name="LaserBlaster" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.13212, 0.25845, -6.44599)
+
+[node name="TurretMesh" parent="." instance=ExtResource("1_wq1o1")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.00695801, 0.995491, 0.360252)
+shape = SubResource("BoxShape3D_hbxxv")
