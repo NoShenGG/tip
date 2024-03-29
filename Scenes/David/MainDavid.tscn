@@ -21,7 +21,14 @@ sky_material = SubResource("PanoramaSkyMaterial_xuhe8")
 background_mode = 2
 sky = SubResource("Sky_7esum")
 tonemap_mode = 2
+ssr_enabled = true
+ssao_enabled = true
+ssao_power = 0.5
+sdfgi_enabled = true
 glow_enabled = true
+volumetric_fog_density = 0.01
+adjustment_brightness = 1.1
+adjustment_saturation = 1.1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5j88q"]
 size = Vector3(1000, 5, 1000)
@@ -44,7 +51,7 @@ albedo_color = Color(0, 0, 1, 1)
 environment = SubResource("Environment_dmjg3")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 10.4616, 0)
 light_energy = 0.4
 shadow_enabled = true
 shadow_opacity = 0.8
@@ -120,7 +127,7 @@ transform = Transform3D(5.47941, -3.46945e-18, 0, 0, 5.47941, 0, -2.84217e-14, 1
 size = Vector3(1, 1, 0.670898)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="BasicBoxRoom/Elements/KeySystem/Keyhole/CSGCombiner3D"]
-transform = Transform3D(1.95605, 0, 0, 0, 1.95605, 0, 0, 0, 1.95605, -0.42218, 1.37562, -2.41706)
+transform = Transform3D(1.95605, -7.01645e-17, -5.69778e-13, -1.86542e-17, 1.95605, -1.1891e-23, 1.247e-14, 6.53974e-25, 1.95605, -0.42218, 1.37562, -2.41706)
 operation = 2
 
 [node name="Area3D" type="Area3D" parent="BasicBoxRoom/Elements/KeySystem/Keyhole"]
