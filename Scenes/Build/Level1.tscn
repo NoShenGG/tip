@@ -171,9 +171,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.9754, -10.1722, 0)
 mesh = SubResource("BoxMesh_p582r")
 skeleton = NodePath("Area3D")
 
-[node name="Area3D" type="Area3D" parent="DeathPlane"]
+[node name="Area3D" type="Area3D" parent="DeathPlane" node_paths=PackedStringArray("player", "elementsToRespawn")]
 collision_mask = 3
 script = ExtResource("4_bkfsa")
+player = NodePath("../../Player")
+elementsToRespawn = NodePath("../../Elements")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DeathPlane/Area3D"]
 shape = SubResource("BoxShape3D_rmrxc")

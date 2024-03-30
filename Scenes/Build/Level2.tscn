@@ -1,0 +1,181 @@
+[gd_scene load_steps=17 format=3 uid="uid://bofdbddgtahl4"]
+
+[ext_resource type="Texture2D" uid="uid://p4cq0akituxu" path="res://Assets/skybox.png" id="1_kyvo3"]
+[ext_resource type="PackedScene" uid="uid://bq7jj8c7sqndr" path="res://Prefabs/Player.tscn" id="2_fprf6"]
+[ext_resource type="Texture2D" uid="uid://cmavs81v1lh6h" path="res://_Prototype/Dark/texture_01.png" id="3_vjguc"]
+[ext_resource type="PackedScene" uid="uid://d3g1llkm5tfb0" path="res://Scenes/Models/Platform.tscn" id="4_4khld"]
+[ext_resource type="PackedScene" uid="uid://rnp0uph34ikj" path="res://Scenes/Models/Keystone.tscn" id="5_b3ajr"]
+[ext_resource type="PackedScene" uid="uid://bpeptod0bu0b" path="res://Scenes/Models/Keyhole.tscn" id="6_hkjy2"]
+[ext_resource type="PackedScene" uid="uid://bfublhg2eklou" path="res://Prefabs/PuzzleElements/Box.tscn" id="7_1t21g"]
+[ext_resource type="Script" path="res://Scripts/DeathPlane.cs" id="8_w2kfi"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1iwyd"]
+panorama = ExtResource("1_kyvo3")
+
+[sub_resource type="Sky" id="Sky_ce3p3"]
+sky_material = SubResource("PanoramaSkyMaterial_1iwyd")
+
+[sub_resource type="Environment" id="Environment_p3taq"]
+background_mode = 2
+sky = SubResource("Sky_ce3p3")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0hk5m"]
+albedo_texture = ExtResource("3_vjguc")
+uv1_triplanar = true
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_g8se5"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bf20a"]
+albedo_color = Color(0.635294, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_p582r"]
+material = SubResource("StandardMaterial3D_bf20a")
+size = Vector3(100, 20, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rmrxc"]
+size = Vector3(100, 20, 100)
+
+[node name="Level2" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_p3taq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 1.23619, 0)
+shadow_enabled = true
+shadow_opacity = 0.2
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.954801, 0.257422, -0.148622, -1.95362e-08, 0.499998, 0.866026, 0.297245, -0.826883, 0.477399, 0, 1.23619, 0)
+light_energy = 0.7
+shadow_enabled = true
+shadow_opacity = 0.2
+
+[node name="Player" parent="." instance=ExtResource("2_fprf6")]
+process_mode = 3
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.04145, 6.56821, -7)
+collision_mask = 3
+_sensitivity = 0.05
+
+[node name="BoxRoom" type="CSGCombiner3D" parent="."]
+material_override = SubResource("StandardMaterial3D_0hk5m")
+use_collision = true
+
+[node name="TheRats" type="CSGCombiner3D" parent="BoxRoom"]
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="BoxRoom/TheRats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.30276, 2.55429, -6.55591)
+size = Vector3(7.17407, 6.43625, 6.80816)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="BoxRoom/TheRats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.7792, 2.21984, -6.4618)
+size = Vector3(17.4749, 6.57773, 6.9964)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="BoxRoom/TheRats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.8979, 0.476356, -6.22596)
+size = Vector3(7.41422, 2.28038, 7.46808)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="BoxRoom/TheRats"]
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="BoxRoom/TheRats/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.8748, 5.54928, -0.440877)
+size = Vector3(33.4862, 12.0986, 5.98809)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="BoxRoom/TheRats/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.89931, 1.08142, -8.58259)
+operation = 2
+size = Vector3(38.8607, 5.76392, 9.40461)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="BoxRoom/TheRats/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5039, 2.0813, 5.31421)
+operation = 2
+size = Vector3(2.4967, 5.1626, 3.39084)
+
+[node name="RubberRoom" type="CSGCombiner3D" parent="BoxRoom"]
+
+[node name="RubberRoomWithRats" type="CSGBox3D" parent="BoxRoom/RubberRoom"]
+transform = Transform3D(4.04641, 0, 0, 0, 1, 0, 0, 0, 3.41991, 35.7302, -0.245152, 6.2389)
+size = Vector3(18.176, 0.5, 14.5512)
+
+[node name="Negative" type="CSGBox3D" parent="BoxRoom/RubberRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.0956, -2.13888, -6.6799)
+operation = 2
+size = Vector3(6.46362, 6, 7.30714)
+
+[node name="CornerLava" type="CSGBox3D" parent="BoxRoom/RubberRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.8991, 1.01093, -3.8622)
+operation = 2
+size = Vector3(9.20773, 6, 12.9425)
+
+[node name="RatsMakeMeCrazy" type="CSGCombiner3D" parent="BoxRoom/RubberRoom"]
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="BoxRoom/RubberRoom/RatsMakeMeCrazy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.4487, 5.98022, -10.5)
+size = Vector3(56.1025, 12.9604, 3)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="BoxRoom/RubberRoom/RatsMakeMeCrazy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.841067, 5.75104, 5.5)
+size = Vector3(3, 12.5021, 32)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="BoxRoom/RubberRoom/RatsMakeMeCrazy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.3362, 5.5, 10.4984)
+size = Vector3(3, 12, 42.2407)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="BoxRoom/RubberRoom/RatsMakeMeCrazy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.7004, 3.29999, 25.0454)
+size = Vector3(7.20502, 7.59998, 6.45923)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="BoxRoom/RubberRoom/RatsMakeMeCrazy"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 32.1582, 5.58258, 16.6779)
+size = Vector3(30.6562, 12.1652, 2.413)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="BoxRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.60732, 0.642187)
+size = Vector3(1, 1, 3.88574)
+
+[node name="Elements" type="Node3D" parent="."]
+
+[node name="Platform" parent="Elements" instance=ExtResource("4_4khld")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.438, 4, 10)
+collision_mask = 2
+_spawnPos = Vector3(36.438, 3, 10)
+
+[node name="Platform2" parent="Elements" instance=ExtResource("4_4khld")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.438, 5, 14)
+collision_mask = 2
+_spawnPos = Vector3(36.438, 5, 14)
+
+[node name="Platform3" parent="Elements" instance=ExtResource("4_4khld")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.438, 6.5, 18)
+collision_mask = 2
+_spawnPos = Vector3(36.438, 6.5, 18)
+
+[node name="Keystone" parent="Elements" instance=ExtResource("5_b3ajr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.6875, 9.98027, -7.81771)
+_spawnPos = Vector3(14.3412, 10.4566, -7.81056)
+
+[node name="Keyhole" parent="Elements" instance=ExtResource("6_hkjy2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.38097, 0.437831, 8.22057)
+
+[node name="Box" parent="Elements" instance=ExtResource("7_1t21g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.9175, 6.76942, -4.71701)
+physics_material_override = SubResource("PhysicsMaterial_g8se5")
+_spawnPos = Vector3(29, 7, -5)
+
+[node name="DeathPlane" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.9754, -10.1722, 0)
+mesh = SubResource("BoxMesh_p582r")
+skeleton = NodePath("Area3D")
+
+[node name="Area3D" type="Area3D" parent="DeathPlane" node_paths=PackedStringArray("player", "elementsToRespawn")]
+collision_mask = 3
+script = ExtResource("8_w2kfi")
+player = NodePath("../../Player")
+elementsToRespawn = NodePath("../../Elements")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DeathPlane/Area3D"]
+shape = SubResource("BoxShape3D_rmrxc")
