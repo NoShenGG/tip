@@ -3,9 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://p4cq0akituxu" path="res://Assets/skybox.png" id="1_kyvo3"]
 [ext_resource type="PackedScene" uid="uid://bq7jj8c7sqndr" path="res://Prefabs/Player.tscn" id="2_fprf6"]
 [ext_resource type="Texture2D" uid="uid://cmavs81v1lh6h" path="res://_Prototype/Dark/texture_01.png" id="3_vjguc"]
-[ext_resource type="PackedScene" uid="uid://d3g1llkm5tfb0" path="res://Scenes/Models/Platform.tscn" id="4_4khld"]
-[ext_resource type="PackedScene" uid="uid://rnp0uph34ikj" path="res://Scenes/Models/Keystone.tscn" id="5_b3ajr"]
-[ext_resource type="PackedScene" uid="uid://bpeptod0bu0b" path="res://Scenes/Models/Keyhole.tscn" id="6_hkjy2"]
+[ext_resource type="PackedScene" path="res://Scenes/Models/Platform.tscn" id="4_4khld"]
+[ext_resource type="PackedScene" path="res://Scenes/Models/Keystone.tscn" id="5_b3ajr"]
+[ext_resource type="PackedScene" path="res://Scenes/Models/Keyhole.tscn" id="6_hkjy2"]
 [ext_resource type="PackedScene" uid="uid://bfublhg2eklou" path="res://Prefabs/PuzzleElements/Box.tscn" id="7_1t21g"]
 [ext_resource type="Script" path="res://Scripts/DeathPlane.cs" id="8_w2kfi"]
 
