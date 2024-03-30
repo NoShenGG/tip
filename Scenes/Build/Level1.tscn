@@ -156,7 +156,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.4007, 10.4566, -7.81056)
 _spawnPos = Vector3(14.3412, 10.4566, -7.81056)
 
 [node name="Keyhole" parent="Elements" instance=ExtResource("7_wqp84")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.79283, 3.10682, 1.05401)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.79283, 3.59302, 1.05401)
+
+[node name="CollisionShape3D" parent="Elements/Keyhole" index="1"]
+transform = Transform3D(0.0254, 0, 0, 0, 0.0254, 0, 0, 0, 0.0254, 0.000603795, -0.0377064, 0.000488997)
 
 [node name="Box" parent="Elements" instance=ExtResource("4_mwetq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.7878, 1.56184, 0)
@@ -179,3 +182,5 @@ shape = SubResource("BoxShape3D_rmrxc")
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 35.4825, 4.07127, -3.44984)
 text = "SANDBOX HERE"
 font_size = 128
+
+[editable path="Elements/Keyhole"]
