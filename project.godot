@@ -33,6 +33,10 @@ project/assembly_name="Tip"
 
 enabled=PackedStringArray("res://addons/FMOD/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/input_helper/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
 
+[filesystem]
+
+import/fbx/enabled=false
+
 [fmod]
 
 settings/banks_path="res://addons/FMOD/banks/Desktop"

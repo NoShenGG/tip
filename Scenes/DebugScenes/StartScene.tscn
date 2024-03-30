@@ -32,12 +32,6 @@ text = "New Game
 "
 icon_alignment = 1
 
-[node name="Load Save" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Load Save
-"
-icon_alignment = 1
-
 [node name="Settings" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Settings"
