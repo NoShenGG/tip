@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://b6b7y8x4wuqx"]
+[gd_scene load_steps=9 format=3 uid="uid://b6b7y8x4wuqx"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_xp8ai"]
-size = Vector3(1.83253, 0.537165, 1.83194)
+[sub_resource type="BoxShape3D" id="BoxShape3D_ntrw0"]
+size = Vector3(1.84142, 0.663971, 1.83469)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c6rm7"]
 resource_name = "DefaultMaterial"
@@ -81,6 +81,9 @@ metallic = 0.36
 albedo_color = Color(0.203922, 0.203922, 0.203922, 1)
 metallic = 0.33
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_xp8ai"]
+size = Vector3(1.83253, 0.582252, 1.83194)
+
 [node name="Button" type="RigidBody3D"]
 axis_lock_linear_x = true
 axis_lock_linear_y = true
@@ -91,9 +94,11 @@ axis_lock_angular_z = true
 freeze = true
 freeze_mode = 1
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.482567, -0.089221, 0.432321)
-shape = SubResource("BoxShape3D_xp8ai")
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.479171, 0.230042, 0.422256)
+shape = SubResource("BoxShape3D_ntrw0")
 
 [node name="RootNode" type="Node3D" parent="."]
 transform = Transform3D(4, 0, 0, 0, -1.74846e-07, 4, 0, -4, -1.74846e-07, 0, 0, 0)
@@ -107,3 +112,7 @@ mesh = SubResource("ArrayMesh_4iywj")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_d5guu")
 surface_material_override/1 = SubResource("StandardMaterial3D_nf17d")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.482567, -0.089221, 0.432321)
+shape = SubResource("BoxShape3D_xp8ai")

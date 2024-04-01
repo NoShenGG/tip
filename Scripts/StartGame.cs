@@ -14,6 +14,7 @@ public partial class StartGame : Control
 	// Called when the node enters the scene tree for the first time.
 	public void onStartButtonPressed()
 	{
+		LoadingScene.currLevel = 1;
 		GetTree().ChangeSceneToFile("res://Scenes/DebugScenes/LoadingScene.tscn");
 	}
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cpmjt7h6bh6yb"]
+[gd_scene load_steps=19 format=3 uid="uid://cpmjt7h6bh6yb"]
 
 [ext_resource type="Texture2D" uid="uid://p4cq0akituxu" path="res://Assets/skybox.png" id="1_miutx"]
 [ext_resource type="PackedScene" uid="uid://bq7jj8c7sqndr" path="res://Prefabs/Player.tscn" id="2_bpe4b"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://d3g1llkm5tfb0" path="res://Scenes/Models/Platform.tscn" id="5_eu1c6"]
 [ext_resource type="PackedScene" uid="uid://rnp0uph34ikj" path="res://Scenes/Models/Keystone.tscn" id="6_cgpd2"]
 [ext_resource type="PackedScene" uid="uid://bpeptod0bu0b" path="res://Scenes/Models/Keyhole.tscn" id="7_wqp84"]
+[ext_resource type="PackedScene" uid="uid://b6b7y8x4wuqx" path="res://Scenes/Models/Button.tscn" id="8_lkgv2"]
+[ext_resource type="Script" path="res://Scripts/SwitchLevelButton.cs" id="9_sh175"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1iwyd"]
 panorama = ExtResource("1_miutx")
@@ -166,16 +168,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.7878, 1.56184, 0)
 physics_material_override = SubResource("PhysicsMaterial_g8se5")
 _spawnPos = Vector3(43.7878, 1.56184, 0)
 
+[node name="Button" parent="Elements" instance=ExtResource("8_lkgv2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.9284, 0.283796, -7.14062)
+
+[node name="Area3D" parent="Elements/Button" index="0"]
+script = ExtResource("9_sh175")
+
+[node name="CollisionShape3D" parent="Elements/Button/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.479172, -0.0937958, 0.422256)
+
+[node name="CollisionShape3D" parent="Elements/Button" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.482567, -0.0666775, 0.432321)
+
 [node name="DeathPlane" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.9754, -10.1722, 0)
 mesh = SubResource("BoxMesh_p582r")
 skeleton = NodePath("Area3D")
 
-[node name="Area3D" type="Area3D" parent="DeathPlane" node_paths=PackedStringArray("player", "elementsToRespawn")]
+[node name="Area3D" type="Area3D" parent="DeathPlane"]
 collision_mask = 3
 script = ExtResource("4_bkfsa")
-player = NodePath("../../Player")
-elementsToRespawn = NodePath("../../Elements")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DeathPlane/Area3D"]
 shape = SubResource("BoxShape3D_rmrxc")
@@ -185,4 +197,8 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 35.482
 text = "SANDBOX HERE"
 font_size = 128
 
+[connection signal="body_entered" from="Elements/Button" to="Elements/Button" method="OnSwitchLevelButtonActivated"]
+[connection signal="body_entered" from="Elements/Button/Area3D" to="Elements/Button/Area3D" method="OnSwitchLevelButtonActivated"]
+
 [editable path="Elements/Keyhole"]
+[editable path="Elements/Button"]
