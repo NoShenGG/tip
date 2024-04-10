@@ -12,7 +12,7 @@ public partial class Player : CharacterBody3D, TimeSubscriber {
 	private const float MaxAcceleration = 10 * MaxVelocityGround;
 	private const float Gravity = 15.34f;
 	private const float StopSpeed = 1.5f;
-	private static readonly float JumpImpulse = Mathf.Sqrt(2 * Gravity * 0.85f);
+	private static readonly float JumpImpulse = Mathf.Sqrt(3 * Gravity * 0.85f);
 	[ExportCategory("Movement")]
 	[Export] private float _friction = 4f;
 	

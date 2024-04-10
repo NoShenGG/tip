@@ -177,6 +177,10 @@ script = ExtResource("9_sh175")
 [node name="CollisionShape3D" parent="Elements/Button/Area3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.479172, -0.0937958, 0.422256)
 
+[node name="Body1" parent="Elements/Button/RootNode/Button v8" index="0"]
+surface_material_override/0 = null
+surface_material_override/1 = null
+
 [node name="CollisionShape3D" parent="Elements/Button" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.482567, -0.0666775, 0.432321)
 
