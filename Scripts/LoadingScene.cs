@@ -7,10 +7,12 @@ using Tip.Scripts.TimeMechanics;
 public partial class LoadingScene : Control
 {
 	//Set as path to intended target scene
-	[Export]  String targetScenePath = "res://Scenes/Build/Level1.tscn";
-
+	[Export]  public String targetScenePath = "res://Scenes/Build/Level1.tscn";
+	public static int currLevel {get; set;}
     public override void _Ready()
     {
+		
+		targetScenePath = "res://Scenes/Build/Level" + currLevel + ".tscn";
 		ResourceLoader.LoadThreadedRequest(targetScenePath);
         TimedSceneSwap();
     }
