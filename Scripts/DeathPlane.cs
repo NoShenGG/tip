@@ -1,26 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Godot;
-using Tip.Scripts.TimeMechanics;
 
 namespace Tip.Scripts;
 
-public partial class DeathPlane : Area3D
-{
-
-	//Declare player and elements to respawn
-	private Player player;
-	private Node3D elementsToRespawn;
-	public static Vector3 spawnPoint {get; private set;}
-	//Write the level to find the player and elements to respawn
-	
+public partial class DeathPlane : Area3D {
+	[Export] private Vector3 _playerSpawnPos = Vector3.Zero;
+	[Export] private Vector3 _playerSpawnRot = Vector3.Zero;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
-		player = GetTree().CurrentScene.GetNode<Player>("/root/Level" + LoadingScene.currLevel + "/Player");
-		elementsToRespawn = GetTree().CurrentScene.GetNode<Node3D>("/root/Level" + LoadingScene.currLevel + "/Elements");
-		spawnPoint = player.Transform.Origin;
-
 		BodyEntered += KillEntity;	
 	}
 
@@ -28,13 +14,9 @@ public partial class DeathPlane : Area3D
 		if (entity is Box box) {
 			box.Respawn();
 		} else if (entity is Player player) {
-			player.Position = spawnPoint;
-			//Set time state back to normal to avoid glitches
-			foreach (Node3D i in elementsToRespawn.GetChildren()) {
-				if (i is Box) {
-					((Box) i).Respawn();
-				}
-			}
+			player.Position = _playerSpawnPos;
+			player.Rotation = _playerSpawnRot;
+			player.Velocity = Vector3.Zero;
 		}
 	}
 }

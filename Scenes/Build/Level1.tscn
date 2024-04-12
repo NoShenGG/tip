@@ -14,12 +14,12 @@
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1iwyd"]
 panorama = ExtResource("1_miutx")
 
-[sub_resource type="Sky" id="Sky_ce3p3"]
+[sub_resource type="Sky" id="Sky_wm47u"]
 sky_material = SubResource("PanoramaSkyMaterial_1iwyd")
 
 [sub_resource type="Environment" id="Environment_p3taq"]
 background_mode = 2
-sky = SubResource("Sky_ce3p3")
+sky = SubResource("Sky_wm47u")
 tonemap_mode = 2
 glow_enabled = true
 
@@ -31,11 +31,11 @@ uv1_triplanar = true
 friction = 0.0
 bounce = 1.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bf20a"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tm061"]
 albedo_color = Color(0.635294, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_p582r"]
-material = SubResource("StandardMaterial3D_bf20a")
+material = SubResource("StandardMaterial3D_tm061")
 size = Vector3(100, 20, 100)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rmrxc"]

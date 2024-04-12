@@ -8,12 +8,10 @@ public partial class PlasmaBolt : Area3D
 	public float speed = 20f;
 	
 	public Vector3 startPos = new Vector3(0, 1.051f, 1.666f);	
-	private Vector3 spawnPoint;
 	
 	public override void _Ready()
 	{
 		//Reuse spawnpoint from the deathplane class
-		spawnPoint = DeathPlane.spawnPoint;
 		shootLaser();
 	}
 
@@ -31,7 +29,7 @@ public partial class PlasmaBolt : Area3D
 	public void OnPlayerEntered(Node3D node) {
 		//if the bullet hits a player, kil
 		if (node is Player player) {
-			player.Position = spawnPoint;
+			//player.Position = spawnPoint;
 		}
 	}
 

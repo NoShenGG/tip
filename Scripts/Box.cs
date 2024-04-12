@@ -21,7 +21,9 @@ public partial class Box : TimeObject
 		Rotation = Vector3.Zero;
 		Freeze = true;
 		Keyframes.Clear();
-		Freeze = false;
+		if (_currentTimeState == TimeState.Normal) {
+			Freeze = false;
+		}
 	}
 
 	public override void _PhysicsProcess(double delta) {

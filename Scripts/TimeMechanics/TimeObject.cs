@@ -5,15 +5,14 @@ namespace Tip.Scripts.TimeMechanics;
 public abstract partial class TimeObject : RigidBody3D, TimeSubscriber {
     protected ObjectHistory Keyframes;
     protected TimeState _currentTimeState;
-    private bool _isReversing;
     private PositionKeyframe _reversalKeyframe;
     private Timer _rewindTimer;
     
     // Called when the node enters the scene tree for the first time.
     public override void _Ready() {
         Keyframes = new ObjectHistory();
-        _isReversing = false;
         _reversalKeyframe = null;
+        FreezeMode = FreezeModeEnum.Kinematic;
         
         // This is NECESSARY to control time behavior. DO NOT TOUCH
         GetNode<TimeManager>("/root/TimeManager").AddSubscriber(this);
@@ -35,13 +34,13 @@ public abstract partial class TimeObject : RigidBody3D, TimeSubscriber {
     */
 
     public override void _PhysicsProcess(double delta) {
-        if (_isReversing) {
+        if (_currentTimeState == TimeState.Rewinding) {
             _reversalKeyframe = Keyframes.RemovePositionKeyframe();
             if (_reversalKeyframe != null) {
                 Position = _reversalKeyframe.Position;
                 Rotation = _reversalKeyframe.Rotation;
             }
-        } else if (!Freeze) {
+        } else if (_currentTimeState == TimeState.Normal) {
             Keyframes.AddPositionKeyframe(Position, Rotation, delta);
         }
     }
@@ -60,17 +59,14 @@ public abstract partial class TimeObject : RigidBody3D, TimeSubscriber {
         _currentTimeState = currentState;
         switch (currentState) {
             case TimeState.Normal:
-                _isReversing = false;
-                FreezeMode = FreezeModeEnum.Static;
+                FreezeMode = FreezeModeEnum.Kinematic;
                 Freeze = false;
                 break;
             case TimeState.Stopped:
-                _isReversing = false;
-                FreezeMode = FreezeModeEnum.Static;
+                FreezeMode = FreezeModeEnum.Kinematic;
                 Freeze = true;
                 break;
             case TimeState.Rewinding:
-                _isReversing = true;
                 FreezeMode = FreezeModeEnum.Kinematic;
                 Freeze = true;
                 break;
