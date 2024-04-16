@@ -6,7 +6,8 @@ public partial class PlasmaBolt : Area3D
 {
 	[Export]
 	public float speed = 20f;
-	
+	[Export] private Vector3 _playerSpawnPos = Vector3.Zero;
+	[Export] private Vector3 _playerSpawnRot = Vector3.Zero;
 	public Vector3 startPos = new Vector3(0, 1.051f, 1.666f);	
 	
 	public override void _Ready()
@@ -29,7 +30,9 @@ public partial class PlasmaBolt : Area3D
 	public void OnPlayerEntered(Node3D node) {
 		//if the bullet hits a player, kil
 		if (node is Player player) {
-			//player.Position = spawnPoint;
+			player.Position = _playerSpawnPos;
+			player.Rotation = _playerSpawnRot;
+			player.Velocity = Vector3.Zero;
 		}
 	}
 

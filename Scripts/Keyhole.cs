@@ -3,8 +3,8 @@ using Godot;
 namespace Tip.Scripts;
 
 public partial class Keyhole : Area3D {
+    [Export] public int currLevel = 1;
     private bool _completed;
-    
     public override void _Ready() {
         _completed = false;
         BodyEntered += EndLevel;
@@ -15,7 +15,7 @@ public partial class Keyhole : Area3D {
         if (body is Keystone keystone)
         {
             GD.Print("Keystone was inserted into keyhole!");
-            CsgBox3D divider = GetNode<CsgBox3D>("/root/Level1/BoxRoom/SandboxDivider");
+            CsgBox3D divider = GetNode<CsgBox3D>("/root/Level" + currLevel + "/BoxRoom/SandboxDivider");
             // Allows for sandbox area to be accessed
             if (IsInstanceValid(divider) && !_completed) {
                 divider.Visible = false;
