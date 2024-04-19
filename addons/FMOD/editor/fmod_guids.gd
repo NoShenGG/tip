@@ -8,6 +8,7 @@ class_name FMODGuids
 
 class Events:
 	const TEST = "{2ab79860-442a-42b0-b956-380fa1dc9a89}"
+	const TITLE = "{f2bfa74c-e31b-4f48-b50c-c85a4989b16d}"
 
 class Busses:
 	const MASTER_BUS = "{a4c296f8-f077-452b-8546-ea7f7bfb8858}"

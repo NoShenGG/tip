@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{d209b6c5-2257-48ad-b4f2-1cb45ba1cc19}">
+		<property name="assetPath">
+			<value>Tip_ical_419.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>112.5</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{4432432a-f97a-49a4-8a78-faa1d37b1cc2}</destination>
+		</relationship>
+	</object>
+</objects>

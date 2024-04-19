@@ -9,13 +9,13 @@ public partial class LoadingScene : Control
 	//Set as path to intended target scene
 	private string targetScenePath;
 	public static int currLevel = 1;
-    public override void _Ready()
-    {
+	public override void _Ready()
+	{
 		
 		targetScenePath = "res://Scenes/Build/Level" + currLevel + ".tscn";
 		ResourceLoader.LoadThreadedRequest(targetScenePath);
-        TimedSceneSwap();
-    }
+		TimedSceneSwap();
+	}
 
 	private async void TimedSceneSwap() {
 		await Task.Delay(TimeSpan.FromMilliseconds(1500));
