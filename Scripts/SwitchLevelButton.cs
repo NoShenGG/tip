@@ -4,6 +4,7 @@ using System;
 namespace Tip.Scripts;
 public partial class SwitchLevelButton : Button
 {
+	[Export] public int nextLevel = 2;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -20,7 +21,7 @@ public partial class SwitchLevelButton : Button
 		{
 			GD.Print("Player entered the switch level button");
 			// Switch to next Level
-			LoadingScene.currLevel++;
+			LoadingScene.currLevel = 2;
 			GetTree().ChangeSceneToFile("res://Scenes/DebugScenes/LoadingScene.tscn");
 		}
 	}

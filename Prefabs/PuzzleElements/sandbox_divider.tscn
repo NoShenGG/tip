@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dsath6ufs3w3e"]
+
+[node name="SandboxDivider" type="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.7189, 4.75378, -3.74543)
+size = Vector3(1, 16.0676, 13.3647)

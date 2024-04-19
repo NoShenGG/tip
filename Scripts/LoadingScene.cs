@@ -7,8 +7,8 @@ using Tip.Scripts.TimeMechanics;
 public partial class LoadingScene : Control
 {
 	//Set as path to intended target scene
-	[Export]  public String targetScenePath = "res://Scenes/Build/Level1.tscn";
-	public static int currLevel {get; set;}
+	private string targetScenePath;
+	public static int currLevel = 1;
     public override void _Ready()
     {
 		
