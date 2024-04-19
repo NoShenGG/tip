@@ -4,16 +4,9 @@
 [ext_resource type="BankAsset" uid="uid://d22gkr47rbgk0" path="res://addons/FMOD/editor/resources/banks/{7837a0c5-7297-0a75-088d-1759e13b91cf}.tres" id="2_qis8k"]
 [ext_resource type="BusAsset" uid="uid://bpiekrg483d80" path="res://addons/FMOD/editor/resources/busses/{a4c296f8-f077-452b-8546-ea7f7bfb8858}.tres" id="3_cs203"]
 [ext_resource type="BusAsset" uid="uid://gvokqkhuthmt" path="res://addons/FMOD/editor/resources/busses/{cc9589d3-1926-4912-82a9-29aca17eb8ae}.tres" id="4_6wfm7"]
+[ext_resource type="EventAsset" uid="uid://d3foryxvp0j0e" path="res://addons/FMOD/editor/resources/events/{aeb67668-fa9d-4d10-8ded-31b9a391c15e}.tres" id="5_741pi"]
 [ext_resource type="EventAsset" uid="uid://dgq3vinfxngpt" path="res://addons/FMOD/editor/resources/events/{2ab79860-442a-42b0-b956-380fa1dc9a89}.tres" id="5_l8eew"]
 [ext_resource type="EventAsset" uid="uid://b1ecmybpopxfm" path="res://addons/FMOD/editor/resources/events/{f2bfa74c-e31b-4f48-b50c-c85a4989b16d}.tres" id="6_sh1gj"]
-
-[sub_resource type="EventAsset" id="EventAsset_xjejs"]
-is_oneshot = true
-min_distance = 1.0
-max_distance = 20.0
-path = "event:/Level"
-guid = "{aeb67668-fa9d-4d10-8ded-31b9a391c15e}"
-name = "Level"
 
 [resource]
 banks = {
@@ -22,7 +15,7 @@ banks = {
 }
 events = {
 "{2ab79860-442a-42b0-b956-380fa1dc9a89}": ExtResource("5_l8eew"),
-"{aeb67668-fa9d-4d10-8ded-31b9a391c15e}": SubResource("EventAsset_xjejs"),
+"{aeb67668-fa9d-4d10-8ded-31b9a391c15e}": ExtResource("5_741pi"),
 "{f2bfa74c-e31b-4f48-b50c-c85a4989b16d}": ExtResource("6_sh1gj")
 }
 busses = {
@@ -47,7 +40,7 @@ event_tree = [{
 "item_type": 1,
 "node_name": "Level",
 "path": "event:/Level",
-"resource": SubResource("EventAsset_xjejs")
+"resource": ExtResource("5_741pi")
 }, {
 "children": [],
 "item_type": 1,
