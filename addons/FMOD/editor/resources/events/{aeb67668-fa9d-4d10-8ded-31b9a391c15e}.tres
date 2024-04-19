@@ -1,0 +1,8 @@
+[gd_resource type="EventAsset" format=3 uid="uid://d3foryxvp0j0e"]
+
+[resource]
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/Level"
+guid = "{aeb67668-fa9d-4d10-8ded-31b9a391c15e}"
+name = "Level"

@@ -1,7 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkbywpu12oe2c"]
+[gd_scene load_steps=6 format=3 uid="uid://dkbywpu12oe2c"]
 
 [ext_resource type="Script" path="res://Scripts/StartGame.cs" id="1_4rdpe"]
+[ext_resource type="BankAsset" uid="uid://d22gkr47rbgk0" path="res://addons/FMOD/editor/resources/banks/{7837a0c5-7297-0a75-088d-1759e13b91cf}.tres" id="2_34up4"]
 [ext_resource type="Texture2D" uid="uid://c1iadtlo28ile" path="res://icon.png" id="2_vrcsc"]
+[ext_resource type="BankAsset" uid="uid://dmm333fcp5vlw" path="res://addons/FMOD/editor/resources/banks/{e02a8011-03ec-4637-8ec4-9da710c89757}.tres" id="3_fufmf"]
+
+[sub_resource type="EventAsset" id="EventAsset_iguhq"]
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/Title"
+guid = "{f2bfa74c-e31b-4f48-b50c-c85a4989b16d}"
+name = "Title"
 
 [node name="StartScene" type="Control"]
 layout_mode = 3
@@ -11,6 +20,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4rdpe")
+
+[node name="StudioBankLoader" type="StudioBankLoader" parent="."]
+load_on = 1
+unload_on = 3
+preload_sample_data = true
+num_banks = 2
+bank_0 = ExtResource("2_34up4")
+bank_1 = ExtResource("3_fufmf")
+
+[node name="StudioEventEmitter2D" type="StudioEventEmitter2D" parent="."]
+play_event = 2
+stop_event = 3
+event = SubResource("EventAsset_iguhq")
+preload_samples = true
+
+[node name="StudioListener2D" type="StudioListener2D" parent="."]
 
 [node name="Menu" type="VBoxContainer" parent="."]
 layout_mode = 1

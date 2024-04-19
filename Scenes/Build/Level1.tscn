@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cpmjt7h6bh6yb"]
+[gd_scene load_steps=23 format=3 uid="uid://cpmjt7h6bh6yb"]
 
 [ext_resource type="Texture2D" uid="uid://p4cq0akituxu" path="res://Assets/skybox.png" id="1_miutx"]
 [ext_resource type="PackedScene" uid="uid://bq7jj8c7sqndr" path="res://Prefabs/Player.tscn" id="2_bpe4b"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://bpeptod0bu0b" path="res://Scenes/Models/Keyhole.tscn" id="7_wqp84"]
 [ext_resource type="PackedScene" uid="uid://b6b7y8x4wuqx" path="res://Scenes/Models/Button.tscn" id="8_lkgv2"]
 [ext_resource type="Script" path="res://Scripts/SwitchLevelButton.cs" id="9_sh175"]
+[ext_resource type="BankAsset" uid="uid://d22gkr47rbgk0" path="res://addons/FMOD/editor/resources/banks/{7837a0c5-7297-0a75-088d-1759e13b91cf}.tres" id="12_y6b1m"]
+[ext_resource type="BankAsset" uid="uid://dmm333fcp5vlw" path="res://addons/FMOD/editor/resources/banks/{e02a8011-03ec-4637-8ec4-9da710c89757}.tres" id="13_g04l8"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1iwyd"]
 panorama = ExtResource("1_miutx")
@@ -41,6 +43,14 @@ size = Vector3(100, 20, 100)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rmrxc"]
 size = Vector3(100, 20, 100)
+
+[sub_resource type="EventAsset" id="EventAsset_xjejs"]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/Level"
+guid = "{aeb67668-fa9d-4d10-8ded-31b9a391c15e}"
+name = "Level"
 
 [node name="Level1" type="Node3D"]
 
@@ -201,6 +211,21 @@ shape = SubResource("BoxShape3D_rmrxc")
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 35.4825, 2.62591, 3.14248)
 text = "SANDBOX HERE"
 font_size = 128
+
+[node name="StudioBankLoader" type="StudioBankLoader" parent="."]
+load_on = 1
+unload_on = 3
+preload_sample_data = true
+num_banks = 2
+bank_0 = ExtResource("12_y6b1m")
+bank_1 = ExtResource("13_g04l8")
+
+[node name="StudioEventEmitter3D" type="StudioEventEmitter3D" parent="."]
+play_event = 1
+stop_event = 3
+event = SubResource("EventAsset_xjejs")
+preload_samples = true
+allow_fadeout = false
 
 [connection signal="body_entered" from="Elements/Button" to="Elements/Button" method="OnSwitchLevelButtonActivated"]
 [connection signal="body_entered" from="Elements/Button/Area3D" to="Elements/Button/Area3D" method="OnSwitchLevelButtonActivated"]
