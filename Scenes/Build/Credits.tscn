@@ -1,0 +1,77 @@
+[gd_scene load_steps=3 format=3 uid="uid://6afvigdxjp2p"]
+
+[ext_resource type="Script" path="res://Scripts/CreditsScript.cs" id="1_v5xyb"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6toqr"]
+font_size = 50
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v5xyb")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -27.5
+offset_top = 50.0
+offset_right = 27.5
+offset_bottom = 73.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Credits"
+label_settings = SubResource("LabelSettings_6toqr")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "David Scott Tran - Project Lead, Lead Programmer, Lead Designer"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Melanie Douglas - Art Lead, Lead 3D Artist"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Ethan Kimmel - Programmer, Level Designer"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Aaron Chen - Puzzle/Level Designer"
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.016
+anchor_top = 0.906
+anchor_right = 0.092
+anchor_bottom = 0.974
+offset_left = 0.567999
+offset_top = -0.0880127
+offset_right = 0.0159912
+offset_bottom = -0.152039
+text = "Back
+"
+
+[connection signal="pressed" from="BackButton" to="." method="onBackButtonPressed"]

@@ -2,19 +2,26 @@ using Godot;
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Tip.Scripts;
 using Tip.Scripts.TimeMechanics;
 
 public partial class LoadingScene : Control
 {
 	//Set as path to intended target scene
 	private string targetScenePath;
-	public static int currLevel = 1;
+	private int _currLevel;
+	
     public override void _Ready()
     {
-		
-		targetScenePath = "res://Scenes/Build/Level" + currLevel + ".tscn";
-		ResourceLoader.LoadThreadedRequest(targetScenePath);
-        TimedSceneSwap();
+	    _currLevel = GetNode<GameManager>("/root/GameManager").CurrentLevel;
+	    if (_currLevel > 2) {
+		    Input.MouseMode = Input.MouseModeEnum.Visible;
+		    targetScenePath = "res://Scenes/Build/StartScene.tscn";
+	    } else {
+		    targetScenePath = "res://Scenes/Build/Level" + _currLevel + ".tscn";
+	    }
+	    ResourceLoader.LoadThreadedRequest(targetScenePath);
+	    TimedSceneSwap();
     }
 
 	private async void TimedSceneSwap() {

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkbywpu12oe2c"]
+[gd_scene load_steps=4 format=3 uid="uid://dkbywpu12oe2c"]
 
-[ext_resource type="Script" path="res://Scripts/StartGame.cs" id="1_4rdpe"]
-[ext_resource type="Texture2D" uid="uid://c1iadtlo28ile" path="res://icon.png" id="2_vrcsc"]
+[ext_resource type="Script" path="res://Scripts/StartGame.cs" id="1_6ksd5"]
+[ext_resource type="Texture2D" uid="uid://binei46m6sxbo" path="res://Assets/tipBG.png" id="2_y8bgr"]
+[ext_resource type="Texture2D" uid="uid://c1iadtlo28ile" path="res://icon.png" id="3_86oqo"]
 
 [node name="StartScene" type="Control"]
 layout_mode = 3
@@ -10,7 +11,32 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_4rdpe")
+script = ExtResource("1_6ksd5")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -353.0
+offset_top = -319.0
+offset_right = 1039.0
+offset_bottom = 970.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_y8bgr")
 
 [node name="Menu" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -37,6 +63,11 @@ layout_mode = 2
 text = "Settings"
 icon_alignment = 1
 
+[node name="Credits" type="Button" parent="Menu"]
+layout_mode = 2
+text = "Credits"
+icon_alignment = 1
+
 [node name="Quit Game" type="Button" parent="Menu"]
 layout_mode = 2
 text = "Quit Game"
@@ -56,8 +87,9 @@ offset_bottom = 568.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("2_vrcsc")
+texture = ExtResource("3_86oqo")
 
 [connection signal="pressed" from="Menu/Start Game" to="." method="onStartButtonPressed"]
 [connection signal="pressed" from="Menu/Settings" to="." method="onSettingsPressed"]
+[connection signal="pressed" from="Menu/Credits" to="." method="onCreditsPressed"]
 [connection signal="pressed" from="Menu/Quit Game" to="." method="onQuitButtonPressed"]

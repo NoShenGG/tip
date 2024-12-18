@@ -15,13 +15,8 @@ public partial class Keyhole : Area3D {
         if (body is Keystone keystone)
         {
             GD.Print("Keystone was inserted into keyhole!");
-            CsgBox3D divider = GetNode<CsgBox3D>("/root/Level" + currLevel + "/BoxRoom/SandboxDivider");
-            // Allows for sandbox area to be accessed
-            if (IsInstanceValid(divider) && !_completed) {
-                divider.Visible = false;
-                PopupText();
-                _completed = true;
-            }
+            GetNode<GameManager>("/root/GameManager").CurrentLevel++;
+            GetTree().ChangeSceneToFile("res://Scenes/Build/LoadingScene.tscn");
         }
         
     }

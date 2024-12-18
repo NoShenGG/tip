@@ -5,7 +5,7 @@ namespace Tip.Scripts;
 
 public partial class TrackMarker : TimeObject {
     public int RewindCount;
-    private const float MaxPositionDeviance = 0.1f;
+    private const float MaxPositionDeviance = 0.3f;
     public override void _Ready() {
         base._Ready();
         GravityScale = 0;

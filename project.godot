@@ -13,17 +13,17 @@ config_version=5
 config/name="Tip"
 config/description="Tip Game Executable"
 config/version="1.0.0"
-run/main_scene="res://Scenes/DebugScenes/StartScene.tscn"
-config/features=PackedStringArray("4.2", "C#", "Forward Plus")
+run/main_scene="res://Scenes/Build/StartScene.tscn"
+config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.png"
 config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
 FMODRuntime="*res://addons/FMOD/runtime/fmod_runtime_manager.gd"
-DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 TimeManager="*res://Scripts/TimeMechanics/TimeManager.cs"
 InputHelper="*res://addons/input_helper/input_helper.gd"
+GameManager="*res://Scripts/GameManager.cs"
 
 [dotnet]
 
@@ -31,7 +31,7 @@ project/assembly_name="Tip"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/FMOD/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/input_helper/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/qodot/plugin.cfg")
+enabled=PackedStringArray("res://addons/FMOD/plugin.cfg", "res://addons/input_helper/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/qodot/plugin.cfg")
 
 [filesystem]
 

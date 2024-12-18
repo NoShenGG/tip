@@ -1,0 +1,14 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+uid="uid://cbhrucurvpfur"
+path="res://.godot/imported/Map_1_Alternating_Bridges.map-08bc169bedd023792fee0d6f22dcd7b3.tres"
+
+[deps]
+
+source_file="res://Assets/maps/Map_1_Alternating_Bridges.map"
+dest_files=["res://.godot/imported/Map_1_Alternating_Bridges.map-08bc169bedd023792fee0d6f22dcd7b3.tres"]
+
+[params]
+

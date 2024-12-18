@@ -21,7 +21,7 @@ public partial class SwitchLevelButton : Button
 		{
 			GD.Print("Player entered the switch level button");
 			// Switch to next Level
-			LoadingScene.currLevel = 2;
+			GetNode<GameManager>("/root/GameManager").CurrentLevel++;
 			GetTree().ChangeSceneToFile("res://Scenes/DebugScenes/LoadingScene.tscn");
 		}
 	}

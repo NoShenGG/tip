@@ -69,7 +69,7 @@ public partial class TimeManager : Node {
             Reset();
             GetViewport().SetInputAsHandled();
             Input.MouseMode = Input.MouseModeEnum.Visible;
-            GetTree().ChangeSceneToFile("res://Scenes/DebugScenes/StartScene.tscn");
+            GetTree().ChangeSceneToFile("res://Scenes/Build/StartScene.tscn");
         }
     }
 
